@@ -14,7 +14,10 @@ const config = {
     ],
 
     kit: {
-        adapter: adapter(),
+        adapter: adapter({
+            pages: 'public',
+            assets: 'public',
+        }),
         prerender: {
             default: true,
         },
