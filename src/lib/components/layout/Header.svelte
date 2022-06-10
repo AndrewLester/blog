@@ -5,11 +5,11 @@ import type { Breadcrumb } from '$lib/types';
 let breadcrumbsPath: Breadcrumb[] | undefined;
 let currentBreadcrumb: Breadcrumb | undefined;
 
-// $: if ($page.stuff.breadcrumbs) {
-//     const breadcrumbs = $page.stuff.breadcrumbs;
-//     breadcrumbsPath = breadcrumbs.slice(0, breadcrumbs.length - 1);
-//     currentBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
-// }
+$: if ($page.stuff.breadcrumbs) {
+    const breadcrumbs = $page.stuff.breadcrumbs;
+    breadcrumbsPath = breadcrumbs.slice(0, breadcrumbs.length - 1);
+    currentBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
+}
 </script>
 
 <header>

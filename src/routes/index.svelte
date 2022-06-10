@@ -3,7 +3,8 @@ import ImageLink from '$lib/components/ImageLink.svelte';
 import PostCard from '$lib/components/PostCard.svelte';
 import type { Post } from '$lib/types';
 
-export let posts: Post[];
+// TODO: Create an endpoint for these and use a load function here
+export let posts: Post[] = [];
 </script>
 
 <h1>
