@@ -10,3 +10,8 @@ export interface Post {
     thumbnail?: Image;
     tags: string[];
 }
+
+export interface Breadcrumb {
+    href: string;
+    title: string;
+}

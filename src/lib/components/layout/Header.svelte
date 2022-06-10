@@ -1,3 +1,17 @@
+<script lang="ts">
+import { page } from '$app/stores';
+import type { Breadcrumb } from '$lib/types';
+
+let breadcrumbsPath: Breadcrumb[] | undefined;
+let currentBreadcrumb: Breadcrumb | undefined;
+
+// $: if ($page.stuff.breadcrumbs) {
+//     const breadcrumbs = $page.stuff.breadcrumbs;
+//     breadcrumbsPath = breadcrumbs.slice(0, breadcrumbs.length - 1);
+//     currentBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
+// }
+</script>
+
 <header>
     <nav>
         <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
@@ -6,7 +20,20 @@
             <li><a href="/tags">Tags</a></li>
         </ul>
     </nav>
-    <slot />
+    {#if breadcrumbsPath && currentBreadcrumb}
+        <nav aria-label="Breadcrumb">
+            <ul>
+                {#each breadcrumbsPath as breadcrumb}
+                    <li class="breadcrumb path">
+                        <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+                    </li>
+                {/each}
+                <li class="breadcrumb current">
+                    <a href={currentBreadcrumb.href}>{currentBreadcrumb.title}</a>
+                </li>
+            </ul>
+        </nav>
+    {/if}
 </header>
 
 <style>
@@ -34,6 +61,10 @@ ul {
 li {
     display: inline;
     margin-left: 10px;
+}
+
+li.breadcrumb.path {
+    color: rgba(0, 0, 0, 0.6);
 }
 
 a {
