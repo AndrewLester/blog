@@ -1,7 +1,5 @@
 /// <reference types="@sveltejs/kit" />
 
-import type { Breadcrumb } from '$lib/types';
-
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare namespace App {
@@ -9,6 +7,6 @@ declare namespace App {
     // interface Platform {}
     // interface Session {}
     interface Stuff {
-        breadcrumbs?: Breadcrumb[];
+        breadcrumbs?: import('$lib/types').Breadcrumb[];
     }
 }
