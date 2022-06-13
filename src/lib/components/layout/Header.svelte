@@ -1,0 +1,112 @@
+<script lang="ts">
+import { breadcrumbs } from '$lib/breadcrumbs';
+import { slide } from 'svelte/transition';
+
+let scrollingDown = false;
+let lastScrollPosition = 0;
+
+function handleScroll() {
+    const currentScrollPosition = document.documentElement.scrollTop;
+    scrollingDown = lastScrollPosition - currentScrollPosition < 0;
+    lastScrollPosition = currentScrollPosition;
+}
+</script>
+
+<svelte:window on:scroll={handleScroll} />
+
+<header class:drawn={scrollingDown}>
+    <nav class="main">
+        <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
+        <ul>
+            <li><a href="/" sveltekit:prefetch>Posts</a></li>
+            <li><a href="/tags">Tags</a></li>
+        </ul>
+    </nav>
+    {#if $breadcrumbs}
+        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide>
+            <ul>
+                {#each $breadcrumbs.path as breadcrumb}
+                    <li class="breadcrumb path">
+                        <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+                    </li>
+                {/each}
+                <li class="breadcrumb current">
+                    <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
+                </li>
+            </ul>
+        </nav>
+    {/if}
+</header>
+
+<style>
+header {
+    position: fixed;
+    display: flex;
+    flex-flow: column nowrap;
+    border-bottom: 1px solid black;
+    background-color: white;
+    width: 100vw;
+    padding: 10px clamp(5px, 2vw, 30px);
+    transition: transform var(--moving-transition-duration) ease;
+    background-color: white;
+    z-index: 10;
+}
+
+header.drawn {
+    transform: translateY(-40px);
+}
+
+nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline;
+}
+
+nav.breadcrumbs {
+    margin-top: 10px;
+}
+
+nav.breadcrumbs > ul {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    direction: rtl;
+}
+
+nav.main li {
+    margin-left: 10px;
+}
+
+li.breadcrumb.path a,
+li.breadcrumb.path {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+li,
+a {
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-family: var(--font-heading);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+li:not(.breadcrumb.path) > a,
+nav > a {
+    color: var(--heading-text-color);
+}
+
+.home-link {
+    font-size: 1.35rem;
+}
+</style>

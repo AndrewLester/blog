@@ -1,0 +1,44 @@
+:root {
+    --font-heading: 'Noto Sans', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --navy: rgb(34, 87, 122);
+    --teal: rgb(54 151 153);
+    --turquoise: rgb(87, 204, 153);
+    --green: rgb(128, 237, 153);
+    --transition-duration: 200ms;
+    --moving-transition-duration: 250ms;
+    --heading-text-color: black;
+    --body-text-color: rgba(0, 0, 0, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --moving-transition-duration: 0ms;
+    }
+}
+
+*, ::after, ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+}
+
+p, time, span {
+    font-family: var(--font-body);
+    line-height: 1.5;
+}
