@@ -2,7 +2,7 @@
 import type { Load } from './__types/index';
 
 export const load: Load = async ({ fetch }) => {
-    const posts = await fetch('/posts').then((res) => res.json());
+    const posts = await fetch('/posts.json').then((res) => res.json());
     return {
         props: {
             posts,
@@ -16,7 +16,7 @@ import ImageLink from '$lib/components/ImageLink.svelte';
 import PostCard from '$lib/components/PostCard.svelte';
 import type { Post } from '$lib/types';
 
-export let posts: Post[] = [];
+export let posts: Post[];
 </script>
 
 <svelte:head>

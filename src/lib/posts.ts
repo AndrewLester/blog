@@ -1,9 +1,8 @@
 import type { Post } from '$lib/types';
-import type { RequestHandler } from './__types/index';
 
-export const get: RequestHandler = async () => {
+export async function getAllPosts(): Promise<Post[]> {
     const posts = [] as Post[];
-    const importables = Object.entries(import.meta.glob('./_posts/*.md'));
+    const importables = Object.entries(import.meta.glob('/src/routes/posts/_posts/*.md'));
     const imports = await Promise.all(
         importables.map(([filename, importer]) =>
             importer().then((imported) => ({
@@ -16,7 +15,7 @@ export const get: RequestHandler = async () => {
     for (const { filename, imported } of imports) {
         const { title, date, tags, thumbnail } = imported.metadata;
         const post = {
-            slug: filename.match(/\.\/_posts\/(.+?)\.md/)![1],
+            slug: filename.match(/.+?_posts\/(.+?)\.md/)![1],
             title,
             date,
             tags,
@@ -25,8 +24,5 @@ export const get: RequestHandler = async () => {
         posts.push(post);
     }
 
-    return {
-        status: 200,
-        body: JSON.stringify(posts),
-    };
-};
+    return posts;
+}

@@ -86,6 +86,7 @@ img {
     flex-flow: row nowrap;
     justify-content: space-between;
     color: rgba(0, 0, 0, 0.6);
+    gap: 10px;
 }
 
 .metadata * {
