@@ -1,10 +1,22 @@
+<script context="module" lang="ts">
+import type { Load } from './__types/index';
+
+export const load: Load = async ({ fetch }) => {
+    const posts = await fetch('/posts.json').then((res) => res.json());
+    return {
+        props: {
+            posts,
+        },
+    };
+};
+</script>
+
 <script lang="ts">
 import ImageLink from '$lib/components/ImageLink.svelte';
 import PostCard from '$lib/components/PostCard.svelte';
 import type { Post } from '$lib/types';
 
-// TODO: Create an endpoint for these and use a load function here
-export let posts: Post[] = [];
+export let posts: Post[];
 </script>
 
 <svelte:head>

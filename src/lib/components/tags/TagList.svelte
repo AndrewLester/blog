@@ -2,7 +2,7 @@
 import Tag from '$lib/components/tags/Tag.svelte';
 
 export let tags: string[];
-export let oneline = true;
+export let oneline = false;
 </script>
 
 <div class="tags" class:oneline>
@@ -16,7 +16,6 @@ export let oneline = true;
     display: flex;
     flex-flow: row wrap;
     gap: 5px 7.5px;
-    flex: 1;
     scrollbar-width: none;
 }
 
@@ -25,9 +24,9 @@ export let oneline = true;
 }
 
 .tags.oneline {
-    display: flex;
     flex-flow: row nowrap;
     overflow: hidden;
+    flex: 1;
 }
 
 .tags:hover,

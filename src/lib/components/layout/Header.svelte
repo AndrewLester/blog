@@ -1,6 +1,6 @@
 <script lang="ts">
 import { breadcrumbs } from '$lib/breadcrumbs';
-import { slide } from 'svelte/transition';
+import { fade, slide } from 'svelte/transition';
 
 let scrollingDown = false;
 let lastScrollPosition = 0;
@@ -14,7 +14,7 @@ function handleScroll() {
 
 <svelte:window on:scroll={handleScroll} />
 
-<header class:drawn={scrollingDown}>
+<header class:drawn={scrollingDown} class:breadcrumbs={$breadcrumbs}>
     <nav class="main">
         <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
         <ul>
@@ -23,17 +23,19 @@ function handleScroll() {
         </ul>
     </nav>
     {#if $breadcrumbs}
-        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide>
-            <ul>
-                {#each $breadcrumbs.path as breadcrumb}
-                    <li class="breadcrumb path">
-                        <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide={{ duration: 200 }}>
+            {#key $breadcrumbs}
+                <ul in:fade={{ duration: 100, delay: 100 }} out:fade={{ duration: 100 }}>
+                    {#each $breadcrumbs.path as breadcrumb}
+                        <li class="breadcrumb path">
+                            <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+                        </li>
+                    {/each}
+                    <li class="breadcrumb current">
+                        <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
                     </li>
-                {/each}
-                <li class="breadcrumb current">
-                    <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
-                </li>
-            </ul>
+                </ul>
+            {/key}
         </nav>
     {/if}
 </header>
@@ -53,7 +55,11 @@ header {
 }
 
 header.drawn {
-    transform: translateY(-40px);
+    transform: translateY(-100%);
+}
+
+header.drawn.breadcrumbs {
+    transform: translateY(-50%);
 }
 
 nav {

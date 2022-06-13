@@ -10,7 +10,12 @@ export let tag: string;
     border-radius: 20px;
     padding: 1px 10px;
     font-family: var(--font-heading);
-    color: currentColor;
+    color: black;
     text-decoration: none;
+    transition: background-color 150ms ease;
+}
+
+.tag:hover {
+    background-color: #bababa;
 }
 </style>

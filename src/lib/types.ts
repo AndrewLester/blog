@@ -1,17 +1,21 @@
-export interface Image {
+export type Image = {
     src: string;
     alt: string;
-}
+};
 
-export interface Post {
+export type Post = {
     slug: string;
     title: string;
-    date: Date;
+    date: string;
     thumbnail?: Image;
     tags: string[];
-}
+};
 
-export interface Breadcrumb {
+export type Breadcrumb = {
     href: string;
     title: string;
+};
+
+export function getPostDate(post: Post): Date {
+    return new Date(post.date);
 }
