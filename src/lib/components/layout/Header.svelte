@@ -14,7 +14,7 @@ function handleScroll() {
 
 <svelte:window on:scroll={handleScroll} />
 
-<header class:drawn={scrollingDown}>
+<header class:drawn={scrollingDown} class:breadcrumbs={$breadcrumbs}>
     <nav class="main">
         <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
         <ul>
@@ -53,7 +53,11 @@ header {
 }
 
 header.drawn {
-    transform: translateY(-40px);
+    transform: translateY(-100%);
+}
+
+header.drawn.breadcrumbs {
+    transform: translateY(-50%);
 }
 
 nav {

@@ -1,26 +1,30 @@
 <script lang="ts">
 import TagList from '$lib/components/tags/TagList.svelte';
-import { dateFormatter } from '$lib/format';
+import { dateFormatter, getPostDate } from '$lib/format';
 import type { Post } from '$lib/types';
 
 export let post: Post;
 </script>
 
-<a href="/posts/{post.slug}" sveltekit:prefetch>
-    <section>
+<section>
+    <a href="/posts/{post.slug}" sveltekit:prefetch>
         {#if post.thumbnail}
             <img src={post.thumbnail?.src} alt={post.thumbnail?.alt} />
         {/if}
         <h3>{post.title}</h3>
         <div class="metadata">
-            <time datetime={post.date.toISOString()}>{dateFormatter.format(post.date)}</time>
-            <TagList tags={post.tags} />
+            <time datetime={getPostDate(post).toDateString()}
+                >{dateFormatter.format(getPostDate(post))}</time>
+            <TagList tags={post.tags} oneline />
         </div>
-    </section>
-</a>
+    </a>
+</section>
 
 <style>
 a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
     text-decoration: none;
     color: inherit;
 }
@@ -36,8 +40,9 @@ section {
 img {
     height: 66%;
     width: 100%;
-    object-fit: fill;
+    object-fit: contain;
     margin-bottom: 10px;
+    padding-inline: 2px;
 }
 
 h3,

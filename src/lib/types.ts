@@ -6,7 +6,7 @@ export interface Image {
 export interface Post {
     slug: string;
     title: string;
-    date: Date;
+    date: string;
     thumbnail?: Image;
     tags: string[];
 }
