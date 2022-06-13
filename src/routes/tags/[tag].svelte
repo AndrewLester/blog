@@ -8,6 +8,12 @@ export const load: Load = async ({ fetch, params: { tag } }) => {
 
     const taggedPosts = posts.filter((post) => post.tags.includes(tag));
 
+    if (taggedPosts.length === 0) {
+        return {
+            status: 404,
+        };
+    }
+
     return {
         props: {
             tag,
@@ -24,7 +30,8 @@ export let tag: string;
 export let taggedPosts: Post[];
 </script>
 
-{tag}
+<h1>{tag} Tag</h1>
+<h2>Appears in {taggedPosts.length} post{taggedPosts.length !== 1 ? 's' : ''}</h2>
 {#each taggedPosts as post (post.slug)}
     <PostCard {post} />
 {/each}

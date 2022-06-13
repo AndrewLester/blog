@@ -23,7 +23,7 @@ function handleScroll() {
         </ul>
     </nav>
     {#if $breadcrumbs}
-        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide>
+        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide={{ duration: 200 }}>
             <ul>
                 {#each $breadcrumbs.path as breadcrumb}
                     <li class="breadcrumb path">

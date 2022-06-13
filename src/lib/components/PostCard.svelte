@@ -9,7 +9,7 @@ export let post: Post;
 <section>
     <a href="/posts/{post.slug}" sveltekit:prefetch>
         {#if post.thumbnail}
-            <img src={post.thumbnail?.src} alt={post.thumbnail?.alt} />
+            <img src={post.thumbnail?.src} alt={post.thumbnail?.alt} loading="lazy" />
         {/if}
         <h3>{post.title}</h3>
         <div class="metadata">
