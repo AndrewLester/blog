@@ -1,6 +1,6 @@
 <script lang="ts">
 import { breadcrumbs } from '$lib/breadcrumbs';
-import { slide } from 'svelte/transition';
+import { fade, slide } from 'svelte/transition';
 
 let scrollingDown = false;
 let lastScrollPosition = 0;
@@ -24,16 +24,18 @@ function handleScroll() {
     </nav>
     {#if $breadcrumbs}
         <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide={{ duration: 200 }}>
-            <ul>
-                {#each $breadcrumbs.path as breadcrumb}
-                    <li class="breadcrumb path">
-                        <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+            {#key $breadcrumbs}
+                <ul in:fade={{ duration: 100, delay: 100 }} out:fade={{ duration: 100 }}>
+                    {#each $breadcrumbs.path as breadcrumb}
+                        <li class="breadcrumb path">
+                            <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+                        </li>
+                    {/each}
+                    <li class="breadcrumb current">
+                        <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
                     </li>
-                {/each}
-                <li class="breadcrumb current">
-                    <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
-                </li>
-            </ul>
+                </ul>
+            {/key}
         </nav>
     {/if}
 </header>
