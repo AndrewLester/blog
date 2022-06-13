@@ -7,6 +7,10 @@ import type { Post } from '$lib/types';
 export let posts: Post[] = [];
 </script>
 
+<svelte:head>
+    <title>Blog | Andrew Lester</title>
+</svelte:head>
+
 <h1>
     A blog about technical learnings as a
     <ImageLink href="https://www.viget.com/" svg="/icons/viget.svg#icon">Viget</ImageLink>

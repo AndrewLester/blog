@@ -9,7 +9,6 @@
     --moving-transition-duration: 250ms;
     --heading-text-color: black;
     --body-text-color: rgba(0, 0, 0, 0.9);
-    --header-height: 46px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -26,11 +25,11 @@
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    line-height: 1.5;
 }
 
 h1 {
     font-size: 2rem;
-    line-height: 1;
     margin-bottom: 15px;
 }
 
@@ -41,4 +40,5 @@ h2 {
 
 p, time, span {
     font-family: var(--font-body);
+    line-height: 1.5;
 }

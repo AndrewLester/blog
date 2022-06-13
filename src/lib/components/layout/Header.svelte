@@ -1,35 +1,37 @@
 <script lang="ts">
-import { page } from '$app/stores';
-import type { Breadcrumb } from '$lib/types';
+import { breadcrumbs } from '$lib/breadcrumbs';
+import { slide } from 'svelte/transition';
 
-let breadcrumbsPath: Breadcrumb[] | undefined;
-let currentBreadcrumb: Breadcrumb | undefined;
+let scrollingDown = false;
+let lastScrollPosition = 0;
 
-$: if ($page.stuff.breadcrumbs) {
-    const breadcrumbs = $page.stuff.breadcrumbs;
-    breadcrumbsPath = breadcrumbs.slice(0, breadcrumbs.length - 1);
-    currentBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
+function handleScroll() {
+    const currentScrollPosition = document.documentElement.scrollTop;
+    scrollingDown = lastScrollPosition - currentScrollPosition < 0;
+    lastScrollPosition = currentScrollPosition;
 }
 </script>
 
-<header>
-    <nav>
+<svelte:window on:scroll={handleScroll} />
+
+<header class:drawn={scrollingDown}>
+    <nav class="main">
         <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
         <ul>
             <li><a href="/" sveltekit:prefetch>Posts</a></li>
             <li><a href="/tags">Tags</a></li>
         </ul>
     </nav>
-    {#if breadcrumbsPath && currentBreadcrumb}
-        <nav aria-label="Breadcrumb">
+    {#if $breadcrumbs}
+        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide>
             <ul>
-                {#each breadcrumbsPath as breadcrumb}
+                {#each $breadcrumbs.path as breadcrumb}
                     <li class="breadcrumb path">
                         <a href={breadcrumb.href}>{breadcrumb.title}</a> /
                     </li>
                 {/each}
                 <li class="breadcrumb current">
-                    <a href={currentBreadcrumb.href}>{currentBreadcrumb.title}</a>
+                    <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
                 </li>
             </ul>
         </nav>
@@ -44,8 +46,14 @@ header {
     border-bottom: 1px solid black;
     background-color: white;
     width: 100vw;
-    padding: 10px clamp(10px, 5vw, 30px);
-    height: var(--header-height);
+    padding: 10px clamp(5px, 2vw, 30px);
+    transition: transform var(--moving-transition-duration) ease;
+    background-color: white;
+    z-index: 10;
+}
+
+header.drawn {
+    transform: translateY(-40px);
 }
 
 nav {
@@ -60,18 +68,42 @@ ul {
 
 li {
     display: inline;
+}
+
+nav.breadcrumbs {
+    margin-top: 10px;
+}
+
+nav.breadcrumbs > ul {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    direction: rtl;
+}
+
+nav.main li {
     margin-left: 10px;
 }
 
+li.breadcrumb.path a,
 li.breadcrumb.path {
     color: rgba(0, 0, 0, 0.6);
 }
 
+li,
 a {
-    color: var(--heading-text-color);
     text-decoration: none;
     font-size: 1.25rem;
     font-family: var(--font-heading);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+li:not(.breadcrumb.path) > a,
+nav > a {
+    color: var(--heading-text-color);
 }
 
 .home-link {
