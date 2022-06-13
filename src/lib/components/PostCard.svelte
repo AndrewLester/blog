@@ -1,7 +1,7 @@
 <script lang="ts">
 import TagList from '$lib/components/tags/TagList.svelte';
-import { dateFormatter, getPostDate } from '$lib/format';
-import type { Post } from '$lib/types';
+import { dateFormatter } from '$lib/format';
+import { getPostDate, type Post } from '$lib/types';
 
 export let post: Post;
 </script>

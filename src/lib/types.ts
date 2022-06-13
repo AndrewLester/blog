@@ -15,3 +15,7 @@ export interface Breadcrumb {
     href: string;
     title: string;
 }
+
+export function getPostDate(post: Post): Date {
+    return new Date(post.date);
+}

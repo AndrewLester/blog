@@ -5,7 +5,3 @@ export const dateFormatter = new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
     year: 'numeric',
 });
-
-export function getPostDate(post: Post): Date {
-    return new Date(post.date);
-}

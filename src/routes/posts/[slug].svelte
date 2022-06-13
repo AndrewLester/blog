@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-import { dateFormatter, getPostDate } from '$lib/format';
-import type { Post } from '$lib/types';
+import { dateFormatter } from '$lib/format';
+import { getPostDate, type Post } from '$lib/types';
 import type { SvelteComponent } from 'svelte';
 import type { Load } from './__types/[slug]';
 
