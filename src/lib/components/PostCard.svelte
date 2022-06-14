@@ -35,6 +35,7 @@ section {
     width: 40ch;
     aspect-ratio: 0.91;
     border-radius: 20px;
+    max-width: 100%;
 }
 
 img {

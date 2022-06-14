@@ -1,5 +1,6 @@
 <script lang="ts">
 import { breadcrumbs } from '$lib/breadcrumbs';
+import { movingTransitionDuration } from '$lib/media';
 import { fade, slide } from 'svelte/transition';
 
 let scrollingDown = false;
@@ -23,7 +24,10 @@ function handleScroll() {
         </ul>
     </nav>
     {#if $breadcrumbs}
-        <nav class="breadcrumbs" aria-label="Breadcrumb" transition:slide={{ duration: 200 }}>
+        <nav
+            class="breadcrumbs"
+            aria-label="Breadcrumb"
+            transition:slide={{ duration: $movingTransitionDuration }}>
             {#key $breadcrumbs}
                 <ul
                     in:fade|local={{ duration: 100, delay: 100 }}
@@ -87,6 +91,10 @@ nav.breadcrumbs > ul {
     white-space: nowrap;
     text-overflow: ellipsis;
     direction: rtl;
+}
+
+nav.breadcrumbs > :global(ul + ul) {
+    display: none;
 }
 
 nav.main li {

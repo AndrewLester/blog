@@ -25,12 +25,7 @@ export let oneline = false;
 
 .tags.oneline {
     flex-flow: row nowrap;
-    overflow: hidden;
-    flex: 1;
-}
-
-.tags:hover,
-.tags:focus {
     overflow-x: auto;
+    flex: 1;
 }
 </style>

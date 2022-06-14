@@ -53,7 +53,7 @@ export let post: Post;
     <div class="metadata">
         <time datetime={getPostDate(post).toDateString()}
             >{dateFormatter.format(getPostDate(post))}</time>
-        <TagList tags={post.tags} />
+        <TagList tags={post.tags} oneline />
     </div>
     <svelte:component this={component} />
 </article>

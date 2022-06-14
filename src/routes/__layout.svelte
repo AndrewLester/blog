@@ -15,8 +15,9 @@ $: headerHeight = $breadcrumbs ? '92px' : '46px';
 main {
     position: relative;
     padding-inline: 10px;
+    padding-bottom: 10px;
     contain: content;
     max-width: 90ch;
-    margin: 0px auto;
+    margin-inline: auto;
 }
 </style>
