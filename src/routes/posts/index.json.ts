@@ -1,5 +1,5 @@
 import { getAllPosts } from '$lib/posts';
-import type { RequestHandler } from './__types/index';
+import type { RequestHandler } from './__types/index.json';
 
 export const get: RequestHandler = async () => {
     const posts = await getAllPosts();
