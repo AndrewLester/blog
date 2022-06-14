@@ -1,6 +1,11 @@
+import { browser } from '$app/env';
 import { derived, readable, type Readable } from 'svelte/store';
 
 export function mediaQuery(query: string): Readable<boolean> {
+    if (!browser) {
+        return readable(false);
+    }
+
     const queryList = window.matchMedia(query);
     const store = readable(queryList.matches, (set) => {
         const listener = (e: MediaQueryListEvent) => set(e.matches);

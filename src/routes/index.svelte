@@ -15,13 +15,12 @@ export const load: Load = async ({ fetch }) => {
 import ImageLink from '$lib/components/ImageLink.svelte';
 import PostCard from '$lib/components/PostCard.svelte';
 import type { Post } from '$lib/types';
+import Meta from '$lib/components/head/Meta.svelte';
 
 export let posts: Post[];
 </script>
 
-<svelte:head>
-    <title>Blog | Andrew Lester</title>
-</svelte:head>
+<Meta title="Blog" />
 
 <h1>
     A blog about technical learnings as a

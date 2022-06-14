@@ -1,6 +1,7 @@
 ---
 title: Typed Components in Svelte
 date: "06-06-2022"
+description: Typed components in svelte are cool
 thumbnail:
     src: '/posts/test/thumbnail.png'
     alt: Svelte and Typescript together

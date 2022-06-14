@@ -6,6 +6,13 @@ import type { Load } from './__types/[slug]';
 
 export const load: Load = async ({ params: { slug } }) => {
     const { metadata: frontmatter, default: component } = await import(`./_posts/${slug}.md`);
+    const post = {
+        slug,
+        title: frontmatter.title,
+        date: new Date(frontmatter.date),
+        thumbnail: frontmatter.thumbnail,
+        tags: frontmatter.tags,
+    };
     const breadcrumbs = [
         {
             href: '/',
@@ -19,13 +26,8 @@ export const load: Load = async ({ params: { slug } }) => {
     return {
         props: {
             component,
-            post: {
-                slug,
-                title: frontmatter.title,
-                date: new Date(frontmatter.date),
-                thumbnail: frontmatter.thumbnail,
-                tags: frontmatter.tags,
-            },
+            post,
+            content: getComponentContent(component, { post }),
         },
         stuff: {
             breadcrumbs,
@@ -35,15 +37,54 @@ export const load: Load = async ({ params: { slug } }) => {
 </script>
 
 <script lang="ts">
+import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
+import { getComponentContent } from '$lib/component';
 
 export let component: typeof SvelteComponent;
 export let post: Post;
+export let content: string;
 </script>
 
-<svelte:head>
-    <title>{post.title} | Andrew Lester</title>
-</svelte:head>
+<Meta
+    title="{post.title} - Blog"
+    description={post.description}
+    image={post.thumbnail?.src || '/favicon.png'}
+    graph={[
+        {
+            '@type': 'BlogPosting',
+            image: post.thumbnail,
+            url: `/posts/${post.slug}`,
+            headline: post.title,
+            alternativeHeadline: post.description,
+            dateCreated: getPostDate(post).toISOString(),
+            datePublished: getPostDate(post).toISOString(),
+            dateModified: getPostDate(post).toISOString(),
+            inLanguage: 'en-US',
+            isFamilyFriendly: 'true',
+            copyrightYear: new Date().getFullYear(),
+            copyrightHolder: 'Andrew Lester',
+            accountablePerson: {
+                '@type': 'Person',
+                name: 'Andrew Lester',
+                url: 'https://andrewlester.net/',
+            },
+            author: {
+                '@type': 'Person',
+                name: 'Andrew Lester',
+                url: 'https://andrewlester.net/',
+            },
+            creator: {
+                '@type': 'Person',
+                name: 'Andrew Lester',
+                url: 'https://andrewlester.net/',
+            },
+            mainEntityOfPage: 'True',
+            keywords: post.tags,
+            genre: post.tags,
+            articleBody: content,
+        },
+    ]} />
 
 <article>
     {#if post.thumbnail}

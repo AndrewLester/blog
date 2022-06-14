@@ -38,10 +38,13 @@ export const load: Load = async ({ fetch, params: { tag } }) => {
 
 <script lang="ts">
 import PostCard from '$lib/components/PostCard.svelte';
+import Meta from '$lib/components/head/Meta.svelte';
 
 export let tag: string;
 export let taggedPosts: Post[];
 </script>
+
+<Meta title="{tag} - Blog" description="Posts about {tag}" />
 
 <h1>{tag} - Tag</h1>
 <h2>Appears in {taggedPosts.length} post{taggedPosts.length !== 1 ? 's' : ''}</h2>
