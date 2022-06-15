@@ -13,9 +13,10 @@ export async function getAllPosts(): Promise<Post[]> {
     );
 
     for (const { filename, imported } of imports) {
-        const { title, date, tags, thumbnail } = imported.metadata;
+        const { title, description, date, tags, thumbnail } = imported.metadata;
         const post = {
             slug: filename.match(/.+?_posts\/(.+?)\.md/)![1],
+            description,
             title,
             date,
             tags,
