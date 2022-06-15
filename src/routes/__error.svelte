@@ -1,0 +1,34 @@
+<script context="module" lang="ts">
+import type { Load } from './__types/__error';
+
+export const load: Load = ({ error, status }) => {
+    if (!error || !status) {
+        return {
+            redirect: '/',
+        };
+    }
+
+    return {
+        props: {
+            status,
+            error,
+        },
+    };
+};
+</script>
+
+<script lang="ts">
+import Meta from '$lib/components/head/Meta.svelte';
+
+export let status: number;
+export let error: Error;
+</script>
+
+<Meta title={status.toString()} />
+
+<h1>{status}</h1>
+{#if status === 404}
+    <p>Return to the <a href="/" sveltekit:prefetch>homepage</a>.</p>
+{:else}
+    <p>An unknown error occured.</p>
+{/if}
