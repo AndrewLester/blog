@@ -85,7 +85,8 @@ export let content: string;
             genre: post.tags,
             articleBody: content,
         },
-    ]} />
+    ]}
+/>
 
 <article>
     {#if post.thumbnail}
@@ -94,7 +95,8 @@ export let content: string;
     <h1>{post.title}</h1>
     <div class="metadata">
         <time datetime={getPostDate(post).toDateString()}
-            >{dateFormatter.format(getPostDate(post))}</time>
+            >{dateFormatter.format(getPostDate(post))}</time
+        >
         <TagList tags={post.tags} oneline />
     </div>
     <svelte:component this={component} />

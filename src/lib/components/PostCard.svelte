@@ -14,7 +14,8 @@ export let post: Post;
         <h3>{post.title}</h3>
         <div class="metadata">
             <time datetime={getPostDate(post).toDateString()}
-                >{dateFormatter.format(getPostDate(post))}</time>
+                >{dateFormatter.format(getPostDate(post))}</time
+            >
             <TagList tags={post.tags} oneline />
         </div>
     </a>

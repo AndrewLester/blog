@@ -1,14 +1,14 @@
 ---
 title: Typed Components in Svelte
-date: "06-06-2022"
+date: '06-06-2022'
 description: Typed components in svelte are cool
 thumbnail:
     src: '/posts/test/thumbnail.png'
     alt: Svelte and Typescript together
 tags:
-- Svelte
-- TypeScript
-- Another
+    - Svelte
+    - TypeScript
+    - Another
 ---
 
 <script>
@@ -16,6 +16,7 @@ import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
 ## Yoooo
+
 Lorem <ImageLink href="https://svelte.dev" svg="/icons/svelte.svg#icon">Svelte</ImageLink> ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim ligula sit amet interdum pulvinar. Maecenas vel est eget orci maximus cursus. Nullam sed orci placerat odio vehicula ultricies vel sagittis lorem. Etiam ac enim semper, faucibus neque quis, malesuada neque. In congue ut lacus at maximus. Cras at pretium nisl. Vestibulum facilisis justo mauris, et lacinia nisl pellentesque non. Nam risus quam, tempor ut dapibus accumsan, placerat vitae leo. In sed pellentesque risus, eget viverra dui. Duis mattis turpis vel tellus lobortis lobortis. Nullam viverra porta mattis. Nam aliquet porta dictum. Nullam interdum eu lectus vel placerat. Sed sit amet lobortis orci. Proin accumsan lectus eu felis posuere placerat. Donec id mollis metus, ut pharetra quam.
 
 ```svelte

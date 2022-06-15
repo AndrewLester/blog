@@ -27,11 +27,13 @@ function handleScroll() {
         <nav
             class="breadcrumbs"
             aria-label="Breadcrumb"
-            transition:slide={{ duration: $movingTransitionDuration }}>
+            transition:slide={{ duration: $movingTransitionDuration }}
+        >
             {#key $breadcrumbs}
                 <ul
                     in:fade|local={{ duration: 100, delay: 100 }}
-                    out:fade|local={{ duration: 100 }}>
+                    out:fade|local={{ duration: 100 }}
+                >
                     {#each $breadcrumbs.path as breadcrumb}
                         <li class="breadcrumb path">
                             <a href={breadcrumb.href}>{breadcrumb.title}</a> /
