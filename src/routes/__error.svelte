@@ -11,7 +11,7 @@ export const load: Load = ({ error, status }) => {
     return {
         props: {
             status,
-            error,
+            message: error.message,
         },
     };
 };
@@ -21,7 +21,7 @@ export const load: Load = ({ error, status }) => {
 import Meta from '$lib/components/head/Meta.svelte';
 
 export let status: number;
-export let error: Error;
+export let message: string;
 </script>
 
 <Meta title={status.toString()} />
@@ -30,5 +30,5 @@ export let error: Error;
 {#if status === 404}
     <p>Return to the <a href="/" sveltekit:prefetch>homepage</a>.</p>
 {:else}
-    <p>An unknown error occured.</p>
+    <p>An unknown error occured. {message}</p>
 {/if}
