@@ -54,6 +54,7 @@ h3,
 time {
     color: rgba(0, 0, 0, 0.6);
     font-family: var(--font-heading);
+    flex-shrink: 0;
 }
 
 .metadata {

@@ -39,6 +39,7 @@ export const load: Load = async ({ params: { slug } }) => {
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
+import ImageLink from '$lib/components/ImageLink.svelte';
 import { getComponentContent } from '$lib/component';
 
 export let component: typeof SvelteComponent;

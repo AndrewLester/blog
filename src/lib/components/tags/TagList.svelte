@@ -26,6 +26,6 @@ export let oneline = false;
 .tags.oneline {
     flex-flow: row nowrap;
     overflow-x: auto;
-    flex: 1;
+    flex-shrink: 1;
 }
 </style>
