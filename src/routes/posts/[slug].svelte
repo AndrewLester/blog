@@ -5,7 +5,17 @@ import type { SvelteComponent } from 'svelte';
 import type { Load } from './__types/[slug]';
 
 export const load: Load = async ({ params: { slug } }) => {
-    const { metadata: frontmatter, default: component } = await import(`./_posts/${slug}.md`);
+    let frontmatter: Post;
+    let component: typeof SvelteComponent;
+    try {
+        const { metadata, default: defaultImport } = await import(`./_posts/${slug}.md`);
+        frontmatter = metadata;
+        component = defaultImport;
+    } catch {
+        return {
+            status: 404,
+        };
+    }
     const post = {
         slug,
         title: frontmatter.title,
@@ -39,7 +49,9 @@ export const load: Load = async ({ params: { slug } }) => {
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
+// This unused import must be imported because dynamic component imports chunks aren't loaded in SSR by themselves.
 import ImageLink from '$lib/components/ImageLink.svelte';
+import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
 import { getComponentContent } from '$lib/component';
 
 export let component: typeof SvelteComponent;
@@ -85,8 +97,7 @@ export let content: string;
             genre: post.tags,
             articleBody: content,
         },
-    ]}
-/>
+    ]} />
 
 <article>
     {#if post.thumbnail}
@@ -95,14 +106,27 @@ export let content: string;
     <h1>{post.title}</h1>
     <div class="metadata">
         <time datetime={getPostDate(post).toDateString()}
-            >{dateFormatter.format(getPostDate(post))}</time
-        >
+            >{dateFormatter.format(getPostDate(post))}</time>
         <TagList tags={post.tags} oneline />
     </div>
     <svelte:component this={component} />
 </article>
 
 <style>
+article {
+    display: grid;
+    grid-template-columns: auto min(90ch, 100%) auto;
+    grid-auto-flow: column;
+}
+
+article :global(*) {
+    grid-column: 2 / 3;
+}
+
+article :global(.full-width) {
+    grid-column: 1 / 4;
+}
+
 article :global(p) {
     margin-bottom: 20px;
     font-size: 1.2rem;
@@ -118,6 +142,11 @@ article :global(:where(h1, h2, h3)) {
 
 article :global(pre) {
     font-size: 1.2rem;
+}
+
+article :global(p a:not(.image-link)) {
+    color: var(--teal);
+    text-underline-offset: 1px;
 }
 
 img {

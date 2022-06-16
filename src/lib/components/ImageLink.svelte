@@ -4,7 +4,7 @@ export let svg: string | undefined = undefined;
 export let image: string | undefined = undefined;
 </script>
 
-<a {href}>
+<a {href} class="image-link">
     {#if svg}
         <svg aria-hidden="true">
             <use xlink:href={svg} />

@@ -32,3 +32,13 @@ export let message: string;
 {:else}
     <p>An unknown error occured. {message}</p>
 {/if}
+
+<style>
+h1 {
+    font-size: 5rem;
+}
+
+* {
+    text-align: center;
+}
+</style>

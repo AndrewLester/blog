@@ -17,7 +17,6 @@ main {
     padding-inline: 10px;
     padding-bottom: 10px;
     contain: content;
-    max-width: 90ch;
     margin-inline: auto;
 }
 </style>

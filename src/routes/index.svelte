@@ -22,19 +22,21 @@ export let posts: Post[];
 
 <Meta title="Blog" />
 
-<h1>
-    A blog about technical learnings as a
-    <ImageLink href="https://www.viget.com/" svg="/icons/viget.svg#icon">Viget</ImageLink>
-    intern and frontend enthusiast.
-</h1>
+<section class="home">
+    <h1>
+        A blog about technical learnings as a
+        <ImageLink href="https://www.viget.com/" svg="/icons/viget.svg#icon">Viget</ImageLink>
+        intern and frontend enthusiast.
+    </h1>
 
-<section>
-    <h2>Posts</h2>
-    <div class="posts">
-        {#each posts as post (post.slug)}
-            <PostCard {post} />
-        {/each}
-    </div>
+    <section>
+        <h2>Posts</h2>
+        <div class="posts">
+            {#each posts as post (post.slug)}
+                <PostCard {post} />
+            {/each}
+        </div>
+    </section>
 </section>
 
 <style>
@@ -42,6 +44,11 @@ h1 {
     max-width: 45ch;
     text-align: center;
     margin: 30px auto;
+}
+
+.home {
+    max-width: 90ch;
+    margin-inline: auto;
 }
 
 .posts {
