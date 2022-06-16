@@ -18,16 +18,12 @@ export let image: string | undefined = undefined;
 
 <style>
 a {
-    display: inline-flex;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     color: var(--color, currentColor);
     font-family: inherit;
     margin-right: calc(-1 * calc(1ch * var(--margin-right, 0.25)));
     margin-left: calc(-1 * calc(1ch * var(--margin-left, 0.25)));
-    flex-flow: row nowrap;
-    align-items: baseline;
-    gap: 5px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -42,7 +38,7 @@ a svg,
 a img {
     height: 1em;
     width: 1em;
-    align-self: center;
+    /* vertical-align: var(--image-vertical-align, text-top); */
 }
 
 a:focus {
