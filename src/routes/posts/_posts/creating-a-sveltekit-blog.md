@@ -1,6 +1,6 @@
 ---
 title: Creating a SvelteKit Blog
-date: '06-15-2022'
+date: '06-16-2022'
 description: The ups and downs of creating a blog with SvelteKit.
 thumbnail:
     src: '/images/posts/creating-a-sveltekit-blog/thumbnail.png'
@@ -21,7 +21,7 @@ import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
 
 For my summer internship at <ImageLink href="https://www.viget.com/" svg="/icons/viget.svg#icon">Viget</ImageLink>, I was encouraged to set up a blog to showcase my learnings over the 10 weeks. Having had some posts in mind for a while, I was ready to get to writing. I first needed to set up the blog's infrastructure, which meant choosing one of the many frontend JS frameworks available.
 
-Since I had used SvelteKit in the past, and I was aware of the utility of its [static-adapter](https://kit.svelte.dev/docs/adapters#supported-environments-static-sites), I made the decision to go with it.
+Since I had used SvelteKit in the past, and I was aware of the utility of its [static-adapter](https://kit.svelte.dev/docs/adapters#supported-environments-static-sites), I made decided to go with it.
 
 ## Process
 
