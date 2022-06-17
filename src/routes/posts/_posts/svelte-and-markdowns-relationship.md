@@ -84,10 +84,10 @@ Here’s what my writing looked like:
 
 ```svelte
 <script>
-import ImageLink from './ImageLink.svelte';
+import Link from './Link.svelte';
 </script>
 
-This is cool: <ImageLink href="https://www.viget.com" --right="25px" />
+This is cool: <Link href="https://www.viget.com" --right="25px" />
 ```
 </div>
 
@@ -97,10 +97,10 @@ Here’s what MDsveX compiled it to:
 
 ```svelte
 <script>
-import ImageLink from './ImageLink.svelte';
+import Link from './Link.svelte';
 </script>
 
-<p>This is cool: <ImageLink href=”<a
+<p>This is cool: <Link href=”<a
   href="https://www.viget.com%22"
   rel="nofollow"
 >https://www.viget.com”</a> —spacing-right=“25px” /></p>
