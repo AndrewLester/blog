@@ -14,8 +14,7 @@ export let post: Post;
         <h3>{post.title}</h3>
         <div class="metadata">
             <time datetime={getPostDate(post).toDateString()}
-                >{dateFormatter.format(getPostDate(post))}</time
-            >
+                >{dateFormatter.format(getPostDate(post))}</time>
             <TagList tags={post.tags} oneline />
         </div>
     </a>
@@ -43,8 +42,15 @@ img {
     height: 66%;
     width: 100%;
     object-fit: contain;
-    margin-bottom: 10px;
     padding-inline: 2px;
+}
+
+h3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 h3,

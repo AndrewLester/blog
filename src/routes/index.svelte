@@ -53,6 +53,7 @@ h1 {
 
 .posts {
     display: flex;
+    flex-flow: row wrap;
     gap: 40px 60px;
 }
 </style>
