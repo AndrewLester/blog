@@ -124,6 +124,6 @@ I also tried [Pandoc’s demo](https://pandoc.org/try/) converter to see if any 
 
 ## What's the Solution?
 
-Well, in an ideal world Markdown parsers everywhere would support attributes starting with `-` so that Svelte component CSS variables would work. On the other hand, supporting such non-conventional attributes may lead to more ambiguity in Markdown syntax. Perhaps a more extensive change at the MDsveX level would be better, but with as little experience as I have in this area I can't see a clear solution.
+Well, in an ideal world Markdown parsers everywhere would support attributes starting with `-` so that Svelte component CSS variables would work. On the other hand, supporting such unconventional attributes may lead to more ambiguity in Markdown syntax. Perhaps a more extensive change at the MDsveX level would be better, but with as little experience as I have in this area I can't see a clear solution.
 
 Needless to say, I won't be using CSS variables on my inline Svelte components in these posts for the time being.
