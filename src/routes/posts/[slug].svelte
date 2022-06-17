@@ -161,6 +161,11 @@ article :global(p code) {
     padding-inline: 2px;
 }
 
+article :global(h3) {
+    color: rgb(70, 70, 70);
+    font-size: 1.5rem;
+}
+
 img {
     width: 100%;
     padding: 20px;
