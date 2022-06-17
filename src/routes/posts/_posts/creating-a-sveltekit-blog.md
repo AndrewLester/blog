@@ -40,7 +40,7 @@ My solution isn't very clever or elegant, but it works. To make sure the CSS is 
 Another setback I encountered was component CSS variables breaking the MDsveX preprocessor when components were used inline in markdown. I've created an example below.
 
 <div class="full-width">
-<CodeComparison arrow>
+<CodeComparison>
 
 <div slot="first">
 

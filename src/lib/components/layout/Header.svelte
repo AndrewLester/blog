@@ -20,7 +20,7 @@ function handleScroll() {
         <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
         <ul>
             <li><a href="/" sveltekit:prefetch>Posts</a></li>
-            <li><a href="/tags">Tags</a></li>
+            <li><a href="/tags" sveltekit:prefetch>Tags</a></li>
         </ul>
     </nav>
     {#if $breadcrumbs}
@@ -36,11 +36,11 @@ function handleScroll() {
                 >
                     {#each $breadcrumbs.path as breadcrumb}
                         <li class="breadcrumb path">
-                            <a href={breadcrumb.href}>{breadcrumb.title}</a> /
+                            <a href={breadcrumb.href} sveltekit:prefetch>{breadcrumb.title}</a> /
                         </li>
                     {/each}
                     <li class="breadcrumb current">
-                        <a href={$breadcrumbs.current.href}>{$breadcrumbs.current.title}</a>
+                        <a href={$breadcrumbs.current.href} sveltekit:prefetch>{$breadcrumbs.current.title}</a>
                     </li>
                 </ul>
             {/key}

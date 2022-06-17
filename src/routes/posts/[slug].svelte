@@ -49,7 +49,8 @@ export const load: Load = async ({ params: { slug } }) => {
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
-// This unused import must be imported because dynamic component imports chunks aren't loaded in SSR by themselves.
+// These unused imports must be imported because dynamic component imports chunks aren't loaded in SSR by themselves.
+// https://github.com/sveltejs/kit/issues/5137
 import ImageLink from '$lib/components/ImageLink.svelte';
 import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
 import { getComponentContent } from '$lib/component';
@@ -125,6 +126,9 @@ article :global(*) {
 
 article :global(.full-width) {
     grid-column: 1 / 4;
+    margin-bottom: 40px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 article :global(p) {
@@ -142,11 +146,19 @@ article :global(:where(h1, h2, h3)) {
 
 article :global(pre) {
     font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
 article :global(p a:not(.image-link)) {
     color: var(--teal);
     text-underline-offset: 1px;
+}
+
+article :global(p code) {
+    background-color: rgb(230, 230, 230);
+    border-radius: 5px;
+    outline: 1px solid gray;
+    padding-inline: 2px;
 }
 
 img {
@@ -165,5 +177,9 @@ img {
 .metadata * {
     font-size: 1.1rem;
     font-family: var(--font-heading);
+}
+
+time {
+    flex-shrink: 0;
 }
 </style>

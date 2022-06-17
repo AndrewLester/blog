@@ -14,15 +14,33 @@ export let arrow = false;
 .code-comparison {
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: 40px;
-    margin-bottom: 40px;
     margin-top: 20px;
+}
+
+.code-comparison :global(pre) {
+    flex: 1;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.code-comparison :global(div) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 125ch;
+    max-width: min(125ch, 100%);
+}
+
+.code-comparison :global(p) {
+    text-align: center;
 }
 
 .arrow {
     font-size: 3rem;
+    align-self: center;
 }
 
 @media (max-width: 950px) {
