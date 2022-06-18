@@ -1,0 +1,40 @@
+name: Build and Deploy to Pages
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run build
+        env:
+          BASE_URL: /blog
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: public/
+  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+      - run: rm -rf *
+      - uses: actions/download-artifact@v3
+        with:
+          name: build
+      - uses: EndBug/add-and-commit@v9.0.0
+        with:
+          default_author: github_actor
+          message: Deployment
