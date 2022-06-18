@@ -30,8 +30,8 @@ export let arrow = false;
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-width: 125ch;
-    max-width: min(125ch, 100%);
+    width: 125ch;
+    max-width: 100%;
 }
 
 .code-comparison :global(p) {
