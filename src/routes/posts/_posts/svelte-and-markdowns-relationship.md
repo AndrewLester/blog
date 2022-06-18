@@ -109,7 +109,7 @@ import Link from './Link.svelte';
 </CodeComparison>
 </div>
 
-Pretty confusing, right? This code isn't even valid because the `ImageLink` component has two `href` attributes. Well, if that wasn’t confusing enough, there’s a third case where it appropriately avoids changing the component and its CSS vars. This only happens if the component is used at the start of a line. I spent some time trying to figure out why this was happening, and it turns out it's several levels below MDsveX.
+Pretty confusing, right? This code isn't even valid because the `Link` component has two `href` attributes. Well, if that wasn’t confusing enough, there’s a third case where it appropriately avoids changing the component and its CSS vars. This only happens if the component is used at the start of a line. I spent some time trying to figure out why this was happening, and it turns out it's several levels below MDsveX.
 
 ### Remark, Micromark, and CommonMark
 
