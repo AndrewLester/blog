@@ -22,6 +22,9 @@ const config = {
         prerender: {
             default: true,
         },
+        paths: {
+            base: process.env.BASE_URL,
+        },
     },
 };
 
