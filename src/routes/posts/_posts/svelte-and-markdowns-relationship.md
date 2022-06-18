@@ -102,7 +102,7 @@ import Link from './Link.svelte';
 <p>This is cool: <Link href=”<a
   href="https://www.viget.com%22"
   rel="nofollow"
->https://www.viget.com”</a> —spacing-right=“25px” /></p>
+>https://www.viget.com”</a> -right=“25px” /></p>
 ```
 </div>
 
