@@ -33,6 +33,7 @@ a {
     color: inherit;
     transition: background-color var(--transition-duration) ease;
     word-break: keep-all;
+    white-space: nowrap;
 }
 
 a svg,
