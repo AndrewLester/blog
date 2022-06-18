@@ -23,7 +23,6 @@ Writing posts for my <a href="/posts/creating-a-sveltekit-blog" sveltekit:prefet
 Fortunately, reusable components are what Svelte is all about. To speed up the integration of these components with my writing, I knew using some flavor of Markdown would be a necessity. <a href="https://mdsvex.pngwn.io/">MDsveX</a>, the canonical Markdown preprocessor for Svelte, pretty much makes this integration seamless. It supports all the usual Markdown features, and brings them right into Svelte components. There are a few cool interactions in particular that I’d like to highlight.
 
 ## Cool Interactions
-
 ### Markdown in Slots
 
 I’ll begin with an example of an MDsveX integration that is especially useful for my blog posts. Since my writing, which includes code examples, is in Markdown, I’d like to pass this Markdown to Svelte components to enhance the layout and add interactivity.
