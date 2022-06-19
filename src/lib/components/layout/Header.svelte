@@ -18,7 +18,10 @@ function handleScroll() {
 
 <header class:drawn={scrollingDown} class:breadcrumbs={$breadcrumbs}>
     <nav class="main">
-        <a href="/" class="home-link" rel="external">Andrew Lester</a>
+        <a href="/" class="home-link" rel="external">
+            <img src="{BASE_URL}/favicon.png" alt="" />
+            Andrew Lester
+        </a>
         <ul>
             <li><a href={BASE_URL || '/'} sveltekit:prefetch>Posts</a></li>
             <li><a href="{BASE_URL}/tags" sveltekit:prefetch>Tags</a></li>
@@ -125,6 +128,31 @@ nav > a {
 }
 
 .home-link {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 5px;
     font-size: 1.35rem;
+    transition: transform 250ms ease;
+    --image-width: 1.25em;
+    --translate-distance: calc(5px + var(--image-width));
+    margin-left: calc(-1 * var(--translate-distance));
+}
+
+.home-link > img {
+    height: var(--image-width);
+    width: var(--image-width);
+    opacity: 0;
+    transform: translateX(calc(1.5 * var(--translate-distance)));
+    transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.home-link:hover > img {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.home-link:hover {
+    transform: translateX(var(--translate-distance));
 }
 </style>
