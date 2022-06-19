@@ -1,9 +1,10 @@
 <script context="module" lang="ts">
 import type { Load } from './__types/[tag]';
 import type { Post } from '$lib/types';
+import { BASE_URL } from '$lib/env';
 
 export const load: Load = async ({ fetch, params: { tag } }) => {
-    const posts: Post[] = await fetch('/posts.json').then((res) => res.json());
+    const posts: Post[] = await fetch(`${BASE_URL}/posts.json`).then((res) => res.json());
 
     const taggedPosts = posts.filter((post) => post.tags.includes(tag));
 
@@ -15,11 +16,11 @@ export const load: Load = async ({ fetch, params: { tag } }) => {
 
     const breadcrumbs = [
         {
-            href: '/tags',
+            href: `${BASE_URL}/tags`,
             title: 'Tags',
         },
         {
-            href: `/tags/${tag}`,
+            href: `${BASE_URL}/tags/${tag}`,
             title: tag,
         },
     ];

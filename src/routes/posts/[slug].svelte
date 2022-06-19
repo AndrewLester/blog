@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+import { BASE_URL } from '$lib/env';
 import { dateFormatter } from '$lib/format';
 import { getPostDate, type Post } from '$lib/types';
 import type { SvelteComponent } from 'svelte';
@@ -25,11 +26,11 @@ export const load: Load = async ({ params: { slug } }) => {
     };
     const breadcrumbs = [
         {
-            href: '/',
+            href: BASE_URL,
             title: 'Posts',
         },
         {
-            href: `/posts/${slug}`,
+            href: `${BASE_URL}/posts/${slug}`,
             title: frontmatter.title,
         },
     ];
@@ -53,7 +54,7 @@ import TagList from '$lib/components/tags/TagList.svelte';
 // https://github.com/sveltejs/kit/issues/5137
 import ImageLink from '$lib/components/ImageLink.svelte';
 import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
-import { getComponentContent } from '$lib/component';
+import { getComponentContent } from '$lib/dom';
 
 export let component: typeof SvelteComponent;
 export let post: Post;
@@ -102,7 +103,7 @@ export let content: string;
 
 <article>
     {#if post.thumbnail}
-        <img src={post.thumbnail.src} alt={post.thumbnail.alt} />
+        <img src="{BASE_URL}{post.thumbnail.src}" alt={post.thumbnail.alt} />
     {/if}
     <h1>{post.title}</h1>
     <div class="metadata">

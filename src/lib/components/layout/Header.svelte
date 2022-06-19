@@ -1,5 +1,6 @@
 <script lang="ts">
 import { breadcrumbs } from '$lib/breadcrumbs';
+import { BASE_URL } from '$lib/env';
 import { movingTransitionDuration } from '$lib/media';
 import { fade, slide } from 'svelte/transition';
 
@@ -17,30 +18,29 @@ function handleScroll() {
 
 <header class:drawn={scrollingDown} class:breadcrumbs={$breadcrumbs}>
     <nav class="main">
-        <a href="/" class="home-link" sveltekit:prefetch>Andrew Lester</a>
+        <a href="/" class="home-link" rel="external">Andrew Lester</a>
         <ul>
-            <li><a href="/" sveltekit:prefetch>Posts</a></li>
-            <li><a href="/tags" sveltekit:prefetch>Tags</a></li>
+            <li><a href={BASE_URL} sveltekit:prefetch>Posts</a></li>
+            <li><a href="{BASE_URL}/tags" sveltekit:prefetch>Tags</a></li>
         </ul>
     </nav>
     {#if $breadcrumbs}
         <nav
             class="breadcrumbs"
             aria-label="Breadcrumb"
-            transition:slide={{ duration: $movingTransitionDuration }}
-        >
+            transition:slide={{ duration: $movingTransitionDuration }}>
             {#key $breadcrumbs}
                 <ul
                     in:fade|local={{ duration: 100, delay: 100 }}
-                    out:fade|local={{ duration: 100 }}
-                >
+                    out:fade|local={{ duration: 100 }}>
                     {#each $breadcrumbs.path as breadcrumb}
                         <li class="breadcrumb path">
                             <a href={breadcrumb.href} sveltekit:prefetch>{breadcrumb.title}</a> /
                         </li>
                     {/each}
                     <li class="breadcrumb current">
-                        <a href={$breadcrumbs.current.href} sveltekit:prefetch>{$breadcrumbs.current.title}</a>
+                        <a href={$breadcrumbs.current.href} sveltekit:prefetch
+                            >{$breadcrumbs.current.title}</a>
                     </li>
                 </ul>
             {/key}

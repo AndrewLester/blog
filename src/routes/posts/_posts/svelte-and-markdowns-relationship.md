@@ -14,11 +14,12 @@ tags:
 <script>
 import ImageLink from '$lib/components/ImageLink.svelte';
 import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
+import { BASE_URL } from '$lib/env';
 </script>
 
 ## Background
 
-Writing posts for my <a href="/posts/creating-a-sveltekit-blog" sveltekit:prefetch>SvelteKit blog</a> is much more time consuming than other writing since the content is best consumed with a plethora of links, code examples, and illustrations. I've taken it upon myself to reduce the friction between ideating on a post to getting it onto the page, which means working on some reusable components for these three media types.
+Writing posts for my <a href="{BASE_URL}/posts/creating-a-sveltekit-blog" sveltekit:prefetch>SvelteKit blog</a> is much more time consuming than other writing since the content is best consumed with a plethora of links, code examples, and illustrations. I've taken it upon myself to reduce the friction between ideating on a post to getting it onto the page, which means working on some reusable components for these three media types.
 
 Fortunately, reusable components are what Svelte is all about. To speed up the integration of these components with my writing, I knew using some flavor of Markdown would be a necessity. <a href="https://mdsvex.pngwn.io/">MDsveX</a>, the canonical Markdown preprocessor for Svelte, pretty much makes this integration seamless. It supports all the usual Markdown features, and brings them right into Svelte components. There are a few cool interactions in particular that I’d like to highlight.
 

@@ -1,11 +1,12 @@
 <script lang="ts">
 import { breadcrumbs } from '$lib/breadcrumbs';
+import { BASE_URL } from '$lib/env';
 import type { JSONObject } from '@sveltejs/kit/types/private';
 
 export let title: string;
 export let description: string =
     'A blog about technical learnings as a computer science student and frontend enthusiast.';
-export let image: string = '/favicon.png';
+export let image: string = `${BASE_URL}/favicon.png`;
 export let graph: JSONObject[] = [];
 
 $: fullTitle = `${title} | Andrew Lester`;

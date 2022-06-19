@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          BASE_URL: /blog
+          VITE_BASE_URL: /blog
       - uses: actions/upload-artifact@v3
         with:
           name: build

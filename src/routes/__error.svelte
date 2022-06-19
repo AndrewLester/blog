@@ -4,7 +4,7 @@ import type { Load } from './__types/__error';
 export const load: Load = ({ error, status }) => {
     if (!error || !status) {
         return {
-            redirect: '/',
+            redirect: `/${BASE_URL}`,
         };
     }
 
@@ -19,6 +19,7 @@ export const load: Load = ({ error, status }) => {
 
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
+import { BASE_URL } from '$lib/env';
 
 export let status: number;
 export let message: string;
@@ -28,7 +29,7 @@ export let message: string;
 
 <h1>{status}</h1>
 {#if status === 404}
-    <p>Return to the <a href="/" sveltekit:prefetch>homepage</a>.</p>
+    <p>Return to the <a href={BASE_URL} sveltekit:prefetch>homepage</a>.</p>
 {:else}
     <p>An unknown error occured. {message}</p>
 {/if}
