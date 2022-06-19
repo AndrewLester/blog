@@ -4,7 +4,7 @@ import type { Load } from './__types/__error';
 export const load: Load = ({ error, status }) => {
     if (!error || !status) {
         return {
-            redirect: `/${BASE_URL}`,
+            redirect: `${BASE_URL || '/'}`,
         };
     }
 
@@ -29,7 +29,7 @@ export let message: string;
 
 <h1>{status}</h1>
 {#if status === 404}
-    <p>Return to the <a href={BASE_URL} sveltekit:prefetch>homepage</a>.</p>
+    <p>Return to the <a href={BASE_URL || '/'} sveltekit:prefetch>homepage</a>.</p>
 {:else}
     <p>An unknown error occured. {message}</p>
 {/if}

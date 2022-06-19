@@ -26,7 +26,7 @@ export const load: Load = async ({ params: { slug } }) => {
     };
     const breadcrumbs = [
         {
-            href: BASE_URL,
+            href: BASE_URL || '/',
             title: 'Posts',
         },
         {
@@ -69,7 +69,7 @@ export let content: string;
         {
             '@type': 'BlogPosting',
             image: post.thumbnail,
-            url: `/posts/${post.slug}`,
+            url: `${BASE_URL}/posts/${post.slug}`,
             headline: post.title,
             alternativeHeadline: post.description,
             dateCreated: getPostDate(post).toISOString(),

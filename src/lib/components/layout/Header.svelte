@@ -20,7 +20,7 @@ function handleScroll() {
     <nav class="main">
         <a href="/" class="home-link" rel="external">Andrew Lester</a>
         <ul>
-            <li><a href={BASE_URL} sveltekit:prefetch>Posts</a></li>
+            <li><a href={BASE_URL || '/'} sveltekit:prefetch>Posts</a></li>
             <li><a href="{BASE_URL}/tags" sveltekit:prefetch>Tags</a></li>
         </ul>
     </nav>
