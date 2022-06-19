@@ -133,7 +133,7 @@ nav > a {
     align-items: center;
     gap: 5px;
     font-size: 1.35rem;
-    transition: transform 250ms ease;
+    transition: transform var(--moving-transition-duration) ease-in-out;
     --image-width: 1.25em;
     --translate-distance: calc(5px + var(--image-width));
     margin-left: calc(-1 * var(--translate-distance));
@@ -144,7 +144,7 @@ nav > a {
     width: var(--image-width);
     opacity: 0;
     transform: translateX(calc(1.5 * var(--translate-distance)));
-    transition: opacity 250ms ease, transform 250ms ease;
+    transition: opacity 250ms ease-in-out, transform var(--moving-transition-duration) ease-in-out;
 }
 
 .home-link:hover > img {
