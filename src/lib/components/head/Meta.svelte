@@ -24,7 +24,7 @@ $: jsonLd = `
     <scrip${'t'} type="application/ld+json">
         {
             "@context": "http://schema.org",
-            "@graph": ${JSON.stringify(graph, null, 2)}
+            "@graph": ${JSON.stringify(graph, null, 2).replace(/<\/?script>/gi, '')}
         }
     </scrip${'t'}>`;
 </script>
