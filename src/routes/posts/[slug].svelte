@@ -54,6 +54,7 @@ import TagList from '$lib/components/tags/TagList.svelte';
 // https://github.com/sveltejs/kit/issues/5137
 import ImageLink from '$lib/components/ImageLink.svelte';
 import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
+import Code from '$lib/components/markdown/Code.svelte';
 import { getComponentContent } from '$lib/dom';
 
 export let component: typeof SvelteComponent;
@@ -137,12 +138,13 @@ article :global(p) {
     font-size: 1.2rem;
 }
 
-article :global(h1) {
-    text-align: center;
-}
-
 article :global(:where(h1, h2, h3)) {
     margin-block: 20px;
+}
+
+article :global(h1) {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 article :global(pre) {
@@ -155,11 +157,14 @@ article :global(p a:not(.image-link)) {
     text-underline-offset: 1px;
 }
 
-article :global(p code) {
+article :global(p code),
+article :global(a code) {
     background-color: rgb(230, 230, 230);
     border-radius: 5px;
     outline: 1px solid gray;
     padding-inline: 2px;
+    font-family: 'Consolas', monospace;
+    font-weight: normal;
 }
 
 article :global(h3) {
@@ -178,6 +183,7 @@ img {
     justify-content: space-between;
     color: rgba(0, 0, 0, 0.6);
     gap: 10px;
+    margin-bottom: 40px;
 }
 
 .metadata * {

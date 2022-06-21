@@ -46,6 +46,7 @@ h1 {
     max-width: 45ch;
     text-align: center;
     margin: 30px auto;
+    font-size: 2rem;
 }
 
 .home {
