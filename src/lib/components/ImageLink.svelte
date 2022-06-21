@@ -40,7 +40,7 @@ a svg,
 a img {
     height: 1em;
     width: 1em;
-    /* vertical-align: var(--image-vertical-align, text-top); */
+    vertical-align: var(--image-vertical-align, -7.5%);
 }
 
 a:focus {
