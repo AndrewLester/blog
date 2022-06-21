@@ -93,7 +93,7 @@ jobs:
 
 </Code>
 
-This workflow is very simple, and just builds your site and pushes it to the `gh-pages` branch.
+This workflow is very simple, and just builds your site and pushes it to the `gh-pages` branch. Add it to the `.github/workflows` folder at the root of your repository.
 
 ## What's to Come
 
