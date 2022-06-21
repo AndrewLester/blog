@@ -19,9 +19,9 @@ import { BASE_URL } from '$lib/env';
 
 ## Why Deploy SvelteKit to Github Pages?
 
-GitHub Pages is a well known, easy to use, and free hosting provider for static websites. It has a number of useful features that hook into GitHub itself, like forwarding pages of your site to different repositories by name. In addition, you can make use of all the other GitHub tools you enjoy, such as actions and issues (with some [cool features](https://utteranc.es/)).
+[GitHub Pages](https://pages.github.com/) is a well known, easy to use, and free hosting provider for static websites. It has a number of useful features that hook into GitHub itself, like forwarding pages of your site to different repositories by name. In addition, you can make use of all the other GitHub tools you enjoy, such as actions and issues (with some [cool features](https://utteranc.es/)).
 
-SvelteKit, Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a static adapter, which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub pages, *even with different base URL*.
+[SvelteKit](https://kit.svelte.dev/), Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a [static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static), which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub pages, *even with different base URL*.
 
 ## SvelteKit Configuration
 
@@ -99,4 +99,4 @@ This workflow is very simple, and just builds your site and pushes it to the `gh
 
 While this setup isn't so bad, it would be nice not to have the intermediary branch `gh-pages` that does nothing other than store your built files. In truth, the files aren't only being stored there, they're also being placed in a GitHub actions artifact after every build to be passed between the workflow jobs.
 
-In [a post about GitHub Pages last December](https://github.blog/changelog/2021-12-16-github-pages-using-github-actions-for-builds-and-deployments-for-public-repositories/) GitHub announced that the GitHub pages build process may soon be customizable. Maybe I've missed an update, but it seems like this feature isn't out yet. Hopefully, this process will be made easier soon!
+In [a post about GitHub Pages last December](https://github.blog/changelog/2021-12-16-github-pages-using-github-actions-for-builds-and-deployments-for-public-repositories/), GitHub announced that the GitHub pages build process may soon be customizable. Maybe I've missed an update, but it seems like this feature isn't out yet. Hopefully, this process will be made easier soon!
