@@ -65,6 +65,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-artifact@v3
