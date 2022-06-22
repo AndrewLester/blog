@@ -21,7 +21,8 @@ import { BASE_URL } from '$lib/env';
 
 [GitHub Pages](https://pages.github.com/) is a well known, easy to use, and free hosting provider for static websites. It has a number of useful features that hook into GitHub itself, like forwarding pages of your site to different repositories by name. In addition, you can make use of all the other GitHub tools you enjoy, such as actions and issues (with some [cool features](https://utteranc.es/)).
 
-[SvelteKit](https://kit.svelte.dev/), Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a [static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static), which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub pages, *even with different base URL*.
+[SvelteKit](https://kit.svelte.dev/), Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a [static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static), which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub pages, *even with a different base URL*.
+
 
 ## SvelteKit Configuration
 
