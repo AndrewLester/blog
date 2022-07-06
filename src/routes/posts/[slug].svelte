@@ -50,11 +50,6 @@ export const load: Load = async ({ params: { slug } }) => {
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
-// These unused imports must be imported because dynamic component imports chunks aren't loaded in SSR by themselves.
-// https://github.com/sveltejs/kit/issues/5137
-import ImageLink from '$lib/components/ImageLink.svelte';
-import CodeComparison from '$lib/components/markdown/CodeComparison.svelte';
-import Code from '$lib/components/markdown/Code.svelte';
 import { getComponentContent } from '$lib/dom';
 
 export let component: typeof SvelteComponent;
