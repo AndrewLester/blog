@@ -173,8 +173,9 @@ article :global(h3) {
 }
 
 img {
-    width: 100%;
     padding: 20px;
+    max-height: 50vh;
+    justify-self: center;
 }
 
 .metadata {
