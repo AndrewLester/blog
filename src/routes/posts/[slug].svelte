@@ -169,6 +169,7 @@ article :global(h3) {
 
 img {
     padding: 20px;
+    max-width: 100%;
     max-height: 50vh;
     justify-self: center;
 }
