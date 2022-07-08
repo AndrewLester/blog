@@ -78,7 +78,7 @@ interface ImageInterface extends JSONObject {
 
 If you do declare `ImageInterface` in this way, then our previous attempt to assign an `ImageInterface` object to a `JSONObject` variable works without issue! That's not great, especially if `JSONObject` isn't a public type, but it works.
 
-Why is this the case? I'm not entirely sure. Intuitively, declaring types with `interface` seems to be less "structural" and more "[nominal](http://nal-typing-explained-56511dd969f4)." It even shows up differently when you hover over it in VSCode.
+Why is this the case? I'm not entirely sure. Intuitively, declaring types with `interface` seems to be less "structural" and more "[nominal]([http://nal-typing-explained-56511dd969f4](https://medium.com/@thejameskyle/type-systems-structural-vs-nominal-typing-explained-56511dd969f4))." It even shows up differently when you hover over it in VSCode.
 
 ![ImageInterface being hovered showing interface ImageInterface]({BASE_URL}/images/posts/types-vs-interfaces-in-typescript/image-interface-hover.png)
 ![ImageType being hovered showing type ImageType = {'{'}src: string;{'}'}]({BASE_URL}/images/posts/types-vs-interfaces-in-typescript/image-type-hover.png)
