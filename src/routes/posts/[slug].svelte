@@ -203,4 +203,11 @@ img {
 time {
     flex-shrink: 0;
 }
+
+@media (max-width: 600px) {
+    .description {
+        padding-inline: 0;
+        font-size: 1.5rem;
+    }
+}
 </style>
