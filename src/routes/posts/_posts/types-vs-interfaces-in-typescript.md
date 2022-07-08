@@ -1,6 +1,6 @@
 ---
 title: Types vs. Interfaces in TypeScript
-date: '06-27-2022'
+date: '07-08-2022'
 description: One key difference between types and interfaces in TypeScript.
 thumbnail:
     src: '/images/posts/types-vs-interfaces-in-typescript/thumbnail.png'
@@ -10,92 +10,85 @@ tags:
 ---
 
 <script>
-import ImageLink from '$lib/components/ImageLink.svelte';
-import Code from '$lib/components/markdown/Code.svelte';
 import { BASE_URL } from '$lib/env';
+import Error from '$lib/components/markdown/Error.svelte';
 </script>
 
-## Why Deploy SvelteKit to Github Pages?
+## Background
 
-[GitHub Pages](https://pages.github.com/) is a well known, easy to use, and free hosting provider for static websites. It has a number of useful features that hook into GitHub itself, like forwarding pages of your site to different repositories by name. In addition, you can make use of all the other GitHub tools you enjoy, such as actions and issues (with some [cool features](https://utteranc.es/)).
+Types and interfaces are two of the most fundamental TypeScript building blocks that allow you to model your data. After several years of developers trying to use interface features on their types and type features on their interfaces, the feature sets of both constructs have grown closer together. [Popular posts on this topic](https://blog.logrocket.com/types-vs-interfaces-in-typescript/) agree that much of the difference between the two lies in their syntax, along with types having a few more options like unions and intersections.
 
-[SvelteKit](https://kit.svelte.dev/), Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a [static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static), which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub pages, *even with a different base URL*.
+I often find that interfaces are the go to option when modeling object structure. For example, a “User” object would be defined by an interface, along with the “Props” type for a React component. I consistently followed this practice until I recently came across an issue (a type error) with an object type I had defined with an interface. The issue was immediately resolved in a completely type safe manner by changing the definition from an interface to a type.
 
+## The Issue
 
-## SvelteKit Configuration
+Evident from the solution to my problem being a simple switch from `interface` to `type`, there are clearly more differences between the two than are highlighted in most posts online. The issue itself is presented in a [TypeScript playground instance](https://www.typescriptlang.org/play?#code/C4TwDgpgBAUgygeQHIDUCGAbArtAvFAZ2ACcBLAOwHMoAfWRJBAIwCsIBjYAbgCgeLgEYgDM07aPGTM2nKAG8eASADaAawggAXIRIVKAXW2TUmHLwC+fAUNHioASQC2aShHvlBIsdAVQ-hYnZtIjIqCz5QSAdnVwAVcDx5Hn8AoJ1QynCedgB7ciIoay9xaSMGaQ5gKHw5VO0AckEieqhzKDQCaJc3DxtvXmy8gsiIUvopVkrq+TqoRohm1vbOp274yC4gA) I've set up, and I'll go through the code here too. To begin, there is a type called `JSONValue` defined, which must be defined as a type since it incorporates a union. It represents a value in an oversimplified JSON object type, where keys may only map to strings or other JSON objects. The actual JSON object type is defined in the interface `JSONObject`, which must be an interface since it uses an index signature.
 
-There is minimal configuration to do with SvelteKit when setting up your codebase for GitHub pages. You'll first need to [tell SvelteKit to use the static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) and change any settings with respect to that. This process isn't so difficult, but it may uncover some bugs in your routing structure on deployment. To make sure you catch these earlier, you can always run `npm run build` locally before pushing commits to GitHub.
+```ts
+type JSONValue = string | JSONObject;
 
-Next, you'll need to add one or two files to your SvelteKit static folder. The first is an empty file named `.nojekyll`. This is important to disable GitHub's default processing of GitHub pages repositories, and the step is also covered in the `adapter-static` README. The following file is only necessary if you're serving your SvelteKit site from the root of your domain (no base URL). The file is named `CNAME`, and it should contain the domain name your site will live at. If you're hosting your site from a base URL, either with a custom domain or GitHub page's default domain, there's no need to add this.
-
-If you are serving your site from a base URL, there's one more change you'll have to make to SvelteKit's configuration. In the [`paths`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) key, change the `base` property to be equal to site's base URL. It should look something like this for a base URL of `/blog`:
-
-```js
-export default {
-    kit: {
-        ...
-
-        paths: {
-            base: '/blog'
-        }
-    },
-};
+interface JSONObject {
+	[key: string]: JSONValue;
+}
 ```
 
-## GitHub Pages Configuration
+Here's an example of an object that meets the `JSONObject` interface.
 
-Since GitHub pages needs the static HTML files SvelteKit's `adapter-static` generates to host your site, you'll need to find some way to build these files whenever you push your code and send them to another branch to serve. Frequently, a branch named `gh-pages` is created to contain the built files, and some CI software will build your app and output the files there. If you're looking for a minimal CI setup to do this, you can use the GitHub workflow I'm using on my blog:
-
-<Code filename="pages.yml" href="https://gist.github.com/AndrewLester/2d3e6257d932831756226ca9a281d9b5">
-
-```yaml
-name: Build and Deploy to Pages
-
-on:
-  push:
-    branches: ['main']
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build/
-  
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: gh-pages
-      - run: rm -rf *
-      - uses: actions/download-artifact@v3
-        with:
-          name: build
-      - uses: EndBug/add-and-commit@v9.0.0
-        with:
-          default_author: github_actions
-          message: Deployment
+```ts
+const obj = { src: 'test' };
+const jsonObj: JSONObject = obj;  // This is valid
 ```
 
-</Code>
+Now, let's consider a case where we want to represent objects with the structure `{ src: string }` as either a type or interface called `Image`. Trying both can't hurt, so I've created them both with slightly different names.
 
-This workflow is very simple, and just builds your site and pushes it to the `gh-pages` branch. Add it to the `.github/workflows` folder at the root of your repository.
+```ts
+interface ImageInterface {
+    src: string;
+}
 
-## What's to Come
+type ImageType = {
+    src: string;
+}
+```
 
-While this setup isn't so bad, it would be nice not to have the intermediary branch `gh-pages` that does nothing other than store your built files. In truth, the files aren't only being stored there, they're also being placed in a GitHub actions artifact after every build to be passed between the workflow jobs.
+With that out of the way, now it's time to assign some objects defined by the interface and type to variables with the type `JSONObject`.
 
-In [a post about GitHub Pages last December](https://github.blog/changelog/2021-12-16-github-pages-using-github-actions-for-builds-and-deployments-for-public-repositories/), GitHub announced that the GitHub pages build process may soon be customizable. Maybe I've missed an update, but it seems like this feature isn't out yet. Hopefully, this process will be made easier soon!
+```ts
+// This doesn't work!
+const interfaceObj: JSONObject = { src: 'test' } as ImageInterface;
+
+// But this does!
+const typeObj: JSONObject = { src: 'test' } as ImageType;
+```
+
+Something's wrong! When we try to assign the first object, casted to `ImageInterface`, to `interfaceObj`, TypeScript gives us this error: <Error>`Type 'ImageInterface' is not assignable to type 'JSONObject'. Index signature for type 'string' is missing in type 'ImageInterface'. (2322)`</Error>
+
+Assigning the object casted to `ImageType` to `typeObj` is fine though, so it must be something to do with the interface and whatever TypeScript is trying to say about the index signature on `JSONObject`.
+
+## The Cause?
+
+So, what is TypeScript trying to say about the index signature on `JSONObject` and assigning another interface to it? At first glance, it doesn't make much sense because one would assume the `ImageInterface` is structurally a subtype of `JSONObject`. That is, `ImageInterface` represents objects that are all also `JSONObject`s. To rephrase this, it makes sense to say that `ImageInterface` extends `JSONObject`. It's also valid to write that in code:
+
+```ts
+// This is valid
+interface ImageInterface extends JSONObject {
+    src: string;
+}
+```
+
+If you do declare `ImageInterface` in this way, then our previous attempt to assign an `ImageInterface` object to a `JSONObject` variable works without issue! That's not great, especially if `JSONObject` isn't a public type, but it works.
+
+Why is this the case? I'm not entirely sure. Intuitively, declaring types with `interface` seems to be less "structural" and more "[nominal](http://nal-typing-explained-56511dd969f4)." It even shows up differently when you hover over it in VSCode.
+
+![ImageInterface being hovered showing interface ImageInterface]({BASE_URL}/images/posts/types-vs-interfaces-in-typescript/image-interface-hover.png)
+![ImageType being hovered showing type ImageType = {'{'}src: string;{'}'}]({BASE_URL}/images/posts/types-vs-interfaces-in-typescript/image-type-hover.png)
+
+This less structural nature means that it needs the same index signature (`[key: string]: string`) that is present in `JSONObject`. In fact, defining the index signature in `ImageInterface` is another way to avoid the type error.
+
+## The Solution
+
+In this case, the only code I could alter was the code for defining the `Image` object structure, which meant that I could either have it extend `JSONObject`, declare the index signature inside, or I could just declare it as a type instead of an interface. Since `JSONObject` was a private type in the context of my issue, I decided to go with the latter. In another case, it may make more sense to just extend `JSONObject` or whatever parent interface you're dealing with. Redeclaring the index signature seems to me the most repetitive and error-prone option.
+
+Generally, I would say using a type is the best way to go. If you use types to model objects by default, you will never run into this issue. In the case where the parent interface is private, you won't have to make special modifications for certain models as you would with interfaces.
+
+That said, the issue isn't too common, at least not common enough to make it into many blog posts about types and interfaces. So, if you're already using interfaces for your object models, I don't see too much of a reason to switch. For reference, the issue I came across was in SvelteKit's endpoint system, so if you do happen to be in this context consider using `type`!

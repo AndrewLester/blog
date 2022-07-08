@@ -28,6 +28,7 @@ a {
     height: 100%;
     text-decoration: none;
     color: inherit;
+    padding-top: 5px;
 }
 
 section {

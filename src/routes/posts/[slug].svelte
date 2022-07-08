@@ -162,6 +162,7 @@ article :global(a code) {
     padding-inline: 2px;
     font-family: 'Consolas', monospace;
     font-weight: normal;
+    white-space: nowrap;
 }
 
 article :global(h3) {

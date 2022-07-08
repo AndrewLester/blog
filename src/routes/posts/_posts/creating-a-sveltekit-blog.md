@@ -8,7 +8,6 @@ thumbnail:
 tags:
     - Svelte
     - SvelteKit
-    - TypeScript
     - Viget
 ---
 
