@@ -22,6 +22,7 @@ export const load: Load = async ({ params: { slug } }) => {
         title: frontmatter.title,
         date: new Date(frontmatter.date),
         thumbnail: frontmatter.thumbnail,
+        description: frontmatter.description,
         tags: frontmatter.tags,
     };
     const breadcrumbs = [
@@ -107,6 +108,7 @@ export let content: string;
             >{dateFormatter.format(getPostDate(post))}</time>
         <TagList tags={post.tags} oneline />
     </div>
+    <p class="description">{post.description}</p>
     <svelte:component this={component} />
 </article>
 
@@ -160,6 +162,7 @@ article :global(a code) {
     padding-inline: 2px;
     font-family: 'Consolas', monospace;
     font-weight: normal;
+    white-space: nowrap;
 }
 
 article :global(h3) {
@@ -186,6 +189,15 @@ img {
 .metadata * {
     font-size: 1.1rem;
     font-family: var(--font-heading);
+}
+
+.description {
+    border-top: 1px solid var(--teal);
+    border-bottom: 1px solid var(--teal);
+    padding: 30px 60px;
+    font-size: 2rem;
+    font-family: var(--font-heading);
+    text-align: center;
 }
 
 time {

@@ -1,7 +1,7 @@
 ---
 title: SvelteKit and GitHub Pages
 date: '06-21-2022'
-description: Deploying a SvelteKit application to GitHub Pages
+description: Deploying a SvelteKit application to GitHub Pages.
 thumbnail:
     src: '/images/posts/sveltekit-and-github-pages/thumbnail.png'
     alt: Svelte and GitHub Together
