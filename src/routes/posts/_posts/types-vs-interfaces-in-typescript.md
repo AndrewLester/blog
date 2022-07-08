@@ -1,14 +1,12 @@
 ---
-title: SvelteKit and GitHub Pages
-date: '06-21-2022'
-description: Deploying a SvelteKit application to GitHub Pages.
+title: Types vs. Interfaces in TypeScript
+date: '06-27-2022'
+description: One key difference between types and interfaces in TypeScript.
 thumbnail:
-    src: '/images/posts/sveltekit-and-github-pages/thumbnail.png'
-    alt: Svelte and GitHub Together
+    src: '/images/posts/types-vs-interfaces-in-typescript/thumbnail.png'
+    alt: Typescript logo
 tags:
-    - Svelte
-    - SvelteKit
-    - Viget
+    - TypeScript
 ---
 
 <script>
