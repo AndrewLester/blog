@@ -1,7 +1,7 @@
 ---
 title: Svelte and Markdown's Relationship
 date: '06-17-2022'
-description: An brief overview of MDsveX and how it wrestles with its internals.
+description: A brief overview of MDsveX and how it wrestles with its internals.
 thumbnail:
     src: '/images/posts/svelte-and-markdowns-relationship/thumbnail.png'
     alt: Svelte and Markdown together
