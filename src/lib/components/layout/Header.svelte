@@ -88,7 +88,7 @@ li {
 }
 
 nav.breadcrumbs {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 nav.breadcrumbs > ul {
