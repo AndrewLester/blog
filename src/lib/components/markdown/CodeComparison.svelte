@@ -26,7 +26,7 @@ export let arrow = false;
     overflow-x: auto;
 }
 
-.code-comparison :global(div) {
+.code-comparison > :global(div) {
     display: flex;
     flex-direction: column;
     flex: 1;

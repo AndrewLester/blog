@@ -119,7 +119,7 @@ article {
     grid-auto-flow: column;
 }
 
-article :global(*) {
+article > :global(*) {
     grid-column: 2 / 3;
 }
 
