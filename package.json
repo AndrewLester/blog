@@ -30,5 +30,8 @@
         "typescript": "~4.6.2",
         "vite": "^2.9.13"
     },
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "remark-shiki-twoslash": "^3.1.0"
+    }
 }

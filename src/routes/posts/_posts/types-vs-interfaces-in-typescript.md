@@ -24,7 +24,7 @@ I often find that interfaces are the go to option when modeling object structure
 
 Evident from the solution to my problem being a simple switch from `interface` to `type`, there are clearly more differences between the two than are highlighted in most posts online. The issue itself is presented in a [TypeScript playground instance](https://www.typescriptlang.org/play?#code/C4TwDgpgBAUgygeQHIDUCGAbArtAvFAZ2ACcBLAOwHMoAfWRJBAIwCsIBjYAbgCgeLgEYgDM07aPGTM2nKAG8eASADaAawggAXIRIVKAXW2TUmHLwC+fAUNHioASQC2aShHvlBIsdAVQ-hYnZtIjIqCz5QSAdnVwAVcDx5Hn8AoJ1QynCedgB7ciIoay9xaSMGaQ5gKHw5VO0AckEieqhzKDQCaJc3DxtvXmy8gsiIUvopVkrq+TqoRohm1vbOp274yC4gA) I've set up, and I'll go through the code here too. To begin, there is a type called `JSONValue` defined, which must be defined as a type since it incorporates a union. It represents a value in an oversimplified JSON object type, where keys may only map to strings or other JSON objects. The actual JSON object type is defined in the interface `JSONObject`, which must be an interface since it uses an index signature.
 
-```ts
+```twoslash include json
 type JSONValue = string | JSONObject;
 
 interface JSONObject {
@@ -32,16 +32,7 @@ interface JSONObject {
 }
 ```
 
-Here's an example of an object that meets the `JSONObject` interface.
-
-```ts
-const obj = { src: 'test' };
-const jsonObj: JSONObject = obj;  // This is valid
-```
-
-Now, let's consider a case where we want to represent objects with the structure `{ src: string }` as either a type or interface called `Image`. Trying both can't hurt, so I've created them both with slightly different names.
-
-```ts
+```twoslash include image
 interface ImageInterface {
     src: string;
 }
@@ -51,9 +42,32 @@ type ImageType = {
 }
 ```
 
+```ts twoslash
+// @include: json
+```
+
+Here's an example of an object that meets the `JSONObject` interface.
+
+```ts twoslash
+// @include: json
+// ---cut---
+const obj = { src: 'test' };
+const jsonObj: JSONObject = obj;
+```
+
+Now, let's consider a case where we want to represent objects with the structure `{ src: string }` as either a type or interface called `Image`. Trying both can't hurt, so I've created them both with slightly different names.
+
+```ts twoslash
+// @include: image
+```
+
 With that out of the way, now it's time to assign some objects defined by the interface and type to variables with the type `JSONObject`.
 
-```ts
+```ts twoslash
+// @errors: 2322
+// @include: json
+// @include: image
+// ---cut---
 // This doesn't work!
 const interfaceObj: JSONObject = { src: 'test' } as ImageInterface;
 
@@ -61,7 +75,7 @@ const interfaceObj: JSONObject = { src: 'test' } as ImageInterface;
 const typeObj: JSONObject = { src: 'test' } as ImageType;
 ```
 
-Something's wrong! When we try to assign the first object, casted to `ImageInterface`, to `interfaceObj`, TypeScript gives us this error: <Error>`Type 'ImageInterface' is not assignable to type 'JSONObject'. Index signature for type 'string' is missing in type 'ImageInterface'. (2322)`</Error>
+Something's wrong! When we try to assign the first object, casted to `ImageInterface`, to `interfaceObj`, TypeScript gives us an error.
 
 Assigning the object casted to `ImageType` to `typeObj` is fine though, so it must be something to do with the interface and whatever TypeScript is trying to say about the index signature on `JSONObject`.
 
@@ -69,7 +83,9 @@ Assigning the object casted to `ImageType` to `typeObj` is fine though, so it mu
 
 So, what is TypeScript trying to say about the index signature on `JSONObject` and assigning another interface to it? At first glance, it doesn't make much sense because one would assume the `ImageInterface` is structurally a subtype of `JSONObject`. That is, `ImageInterface` represents objects that are all also `JSONObject`s. To rephrase this, it makes sense to say that `ImageInterface` extends `JSONObject`. It's also valid to write that in code:
 
-```ts
+```ts twoslash
+// @include: json
+// ---cut---
 // This is valid
 interface ImageInterface extends JSONObject {
     src: string;
@@ -80,12 +96,19 @@ If you do declare `ImageInterface` in this way, then our previous attempt to ass
 
 Why is this the case? I'm not entirely sure. My initial idea was that, intuitively, declaring types with `interface` seems to be less "structural" and more "[nominal](https://medium.com/@thejameskyle/type-systems-structural-vs-nominal-typing-explained-56511dd969f4)". It even shows up differently when you hover over it in VSCode.
 
-![ImageInterface being hovered showing interface ImageInterface]({BASE_URL}/images/posts/types-vs-interfaces-in-typescript/image-interface-hover.png)
-![ImageType being hovered showing type ImageType = {'{'}src: string;{'}'}]({BASE_URL}/images/posts/types-vs-interfaces-in-typescript/image-type-hover.png)
+```ts twoslash
+// @include: image
+// ---cut---
+type t1 = ImageInterface;
+//        ^?
+
+type t2 = ImageType;
+//        ^?
+```
 
 This less structural nature means that it needs the same index signature (`[key: string]: string`) that is present in `JSONObject`. In fact, defining the index signature in `ImageInterface` is another way to avoid the type error.
 
-But, after bringing the problem up with my [Viget advisor](https://www.viget.com/about/team/ntelsan/), he and [another TypeScript enthusiast](https://www.viget.com/about/team/shawk/) at Viget were able to pinpoint the issue. Literally, [this Github issue comment](https://github.com/Microsoft/TypeScript/issues/15300#issuecomment-332366024) describes the exact reasoning behind this behavior, and it appears that the main consideration was `interface` *declaration merging*. The idea seems to be that because declaration merging exists for interfaces, it is less safe to assume that they will structurally fit another type's index signature at any given moment. 
+But, after bringing the problem up with my [Viget advisor](https://www.viget.com/about/team/ntelsan/), he and [another TypeScript enthusiast](https://www.viget.com/about/team/shawk/) at Viget were able to pinpoint the issue. Literally, [this Github issue comment](https://github.com/Microsoft/TypeScript/issues/15300#issuecomment-332366024) describes the exact reasoning behind this behavior, and it appears that the main consideration was `interface` [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces). The idea seems to be that because declaration merging exists for interfaces, it is less safe to assume that they will structurally fit another type's index signature at any given moment. 
 
 ## The Solution
 
@@ -93,4 +116,4 @@ In this case, the only code I could alter was the code for defining the `Image` 
 
 Generally, I would say using a type is the best way to go. If you use types to model objects by default, you will never run into this issue. In the case where the parent interface is private, you won't have to make special modifications for certain models as you would with interfaces.
 
-That said, the issue isn't too common, at least not common enough to make it into many blog posts about types and interfaces. So, if you're already using interfaces for your object models, I don't see too much of a reason to switch. For reference, the issue I came across was in SvelteKit's endpoint system, so if you do happen to be in this context consider using `type`!
+That said, the issue isn't too common, at least not common enough to make it into many blog posts about types and interfaces. So, if you're already using interfaces for your object models, I don't see too much of a reason to switch. For reference, the issue I came across was in SvelteKit's endpoint system, so if you do happen to be in this context consider using `type`! Or, consider taking a look at [this issue](https://github.com/sveltejs/kit/issues/5468) which makes it clear that you can still use `interface`.

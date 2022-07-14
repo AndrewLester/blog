@@ -46,7 +46,7 @@ Another setback I encountered was component CSS variables breaking the MDsveX pr
 
 The code I was trying to write looked like this:
 
-```svelte
+```svelte {6}
 <script>
 import Chart from './Chart.svelte';
 </script>
@@ -61,7 +61,7 @@ Inline: <Chart --foo="bar" />
 
 After MDsveX was done with it, it looked like this:
 
-```svelte
+```svelte {6}
 <script>
 import Chart from './Chart.svelte';
 </script>
