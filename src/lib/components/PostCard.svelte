@@ -38,6 +38,17 @@ section {
     aspect-ratio: 0.91;
     border-radius: 20px;
     max-width: 100%;
+    transition: box-shadow 200ms ease-out, transform 200ms ease-out;
+}
+
+section:hover {
+    box-shadow: -4px 4px 10px 0px rgb(0 0 0 / 20%);
+    transform: translate(5px, -5px);
+}
+
+section:active {
+    box-shadow: none;
+    transform: none;
 }
 
 img {
