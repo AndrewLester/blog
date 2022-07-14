@@ -56,9 +56,9 @@ pre.shiki .language-id {
 }
 
 /* Visually differentiates twoslash code samples  */
-pre.twoslash {
-    /* border-color: #719af4; */
-}
+/* pre.twoslash {
+    border-color: #719af4;
+} */
 
 /** When you mouse over the pre, show the underlines */
 pre.twoslash:hover data-lsp {

@@ -1,10 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
-import { createShikiHighlighter, renderCodeToHTML, runTwoSlash } from 'shiki-twoslash';
 import { highlightersFromSettings, remarkVisitor } from 'remark-shiki-twoslash';
-
-const twoSlashable = ['js', 'javascript', 'ts', 'typescript', 'tsx', 'jsx', 'json', 'jsn'];
 
 export const escapeSvelte = (str) =>
     str

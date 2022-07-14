@@ -32,7 +32,6 @@
     },
     "type": "module",
     "dependencies": {
-        "remark-shiki-twoslash": "^3.1.0",
-        "shiki-twoslash": "^3.1.0"
+        "remark-shiki-twoslash": "^3.1.0"
     }
 }
