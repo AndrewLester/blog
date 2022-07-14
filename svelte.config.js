@@ -1,12 +1,17 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
-import { highlightersFromSettings, remarkVisitor } from 'remark-shiki-twoslash';
+import { highlightersFromSettings, transformAttributesToHTML } from 'remark-shiki-twoslash';
 
+/**
+ * Swiped from MDsveX
+ */
 export const escapeSvelte = (str) =>
     str
         .replace(/[{}`]/g, (c) => ({ '{': '&#123;', '}': '&#125;', '`': '&#96;' }[c]))
         .replace(/\\([trn])/g, '&#92;$1');
+
+const twoslashSettings = { theme: 'min-light', alwayRaiseForTwoslashExceptions: true };
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -19,20 +24,16 @@ const config = {
             extensions: ['.md'],
             highlight: {
                 highlighter: async (code, lang = '', metastring = '') => {
-                    const settings = { theme: 'min-light' };
-                    const highlighters = await highlightersFromSettings(settings);
-                    const visitor = remarkVisitor(highlighters, settings);
+                    const highlighters = await highlightersFromSettings(twoslashSettings);
 
-                    const node = {
-                        value: code,
-                        lang,
-                        meta: metastring,
-                        children: [],
-                    };
-
-                    visitor(node);
-
-                    return escapeSvelte(node.value);
+                    return escapeSvelte(
+                        transformAttributesToHTML(
+                            code,
+                            `${lang} ${metastring}`,
+                            highlighters,
+                            twoslashSettings,
+                        ),
+                    );
                 },
             },
         }),
