@@ -19,7 +19,7 @@ const config = {
             extensions: ['.md'],
             highlight: {
                 highlighter: async (code, lang = '', metastring = '') => {
-                    const settings = { theme: 'light-plus' };
+                    const settings = { theme: 'min-light' };
                     const highlighters = await highlightersFromSettings(settings);
                     const visitor = remarkVisitor(highlighters, settings);
 
