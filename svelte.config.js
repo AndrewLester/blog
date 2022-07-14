@@ -1,11 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
-import {
-    transformAttributesToHTML,
-    setupForFile,
-    highlightersFromSettings,
-} from 'remark-shiki-twoslash';
+import { transformAttributesToHTML, highlightersFromSettings } from 'remark-shiki-twoslash';
 
 /**
  * Swiped from MDsveX
