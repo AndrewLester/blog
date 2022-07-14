@@ -32,10 +32,14 @@ Next, you'll need to add one or two files to your SvelteKit static folder. The f
 
 If you are serving your site from a base URL, there's one more change you'll have to make to SvelteKit's configuration. In the [`paths`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) key, change the `base` property to be equal to site's base URL. It should look something like this for a base URL of `/blog`:
 
-```js
-export default {
+```js twoslash {4-7}
+/// <reference types="@sveltejs/kit" />
+const otherStuff = {};
+/** @type {import('@sveltejs/kit').Config} */
+// ---cut---
+const config = {
     kit: {
-        ...
+        ...otherStuff,
 
         paths: {
             base: '/blog'
