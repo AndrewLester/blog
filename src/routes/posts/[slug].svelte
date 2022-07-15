@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-import { BASE_URL } from '$lib/env';
+import { BASE_URL, URL } from '$lib/env';
 import { dateFormatter } from '$lib/format';
 import { getPostDate, type Post } from '$lib/types';
 import type { SvelteComponent } from 'svelte';
@@ -62,7 +62,7 @@ export let content: string;
 <Meta
     title="{post.title} - Blog"
     description={post.description}
-    image="{$page.url.origin}{BASE_URL}{post.thumbnail?.src || '/favicon.png'}"
+    image="{URL ? `https://${URL}` : $page.url.origin}{BASE_URL}{post.thumbnail?.src || '/favicon.png'}"
     graph={[
         {
             '@type': 'BlogPosting',
