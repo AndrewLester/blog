@@ -70,7 +70,7 @@ To be clear, MDsveX is a great library for writing Markdown in Svelte. It suppor
 With that said, there was one bug that irked me at the start, since it goes hand in hand with reusable components. For context, Svelte supports passing CSS variables to components so that they can alter their styling in a similar fashion to props
 
 ```svelte
-<Component --right-spacing=”20px” />
+<Component --right-spacing="20px" />
 ```
 
 What I noticed when trying to use this in MDsveX was that it never worked, and sometimes it even produced surprisingly invalid Svelte code. Here’s an example of a very odd compilation:
