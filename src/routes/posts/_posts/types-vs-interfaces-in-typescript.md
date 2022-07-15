@@ -94,7 +94,7 @@ interface ImageInterface extends JSONObject {
 
 If you do declare `ImageInterface` in this way, then our previous attempt to assign an `ImageInterface` object to a `JSONObject` variable works without issue! That's not great, especially if `JSONObject` isn't a public type, but it works.
 
-Why is this the case? I'm not entirely sure. My initial idea was that, intuitively, declaring types with `interface` seems to be less "structural" and more "[nominal](https://medium.com/@thejameskyle/type-systems-structural-vs-nominal-typing-explained-56511dd969f4)". It even shows up differently when you hover over it in VSCode.
+Why is this the case? My initial idea was that, intuitively, declaring types with `interface` seems to be less "structural" and more "[nominal](https://medium.com/@thejameskyle/type-systems-structural-vs-nominal-typing-explained-56511dd969f4)". It even shows up differently when you hover over it in VSCode.
 
 ```ts twoslash
 // @include: image
@@ -108,7 +108,7 @@ type t2 = ImageType;
 
 This less structural nature means that it needs the same index signature (`[key: string]: string`) that is present in `JSONObject`. In fact, defining the index signature in `ImageInterface` is another way to avoid the type error.
 
-But, after bringing the problem up with my [Viget advisor](https://www.viget.com/about/team/ntelsan/), he and [another TypeScript enthusiast](https://www.viget.com/about/team/shawk/) at Viget were able to pinpoint the issue. Literally, [this Github issue comment](https://github.com/Microsoft/TypeScript/issues/15300#issuecomment-332366024) describes the exact reasoning behind this behavior, and it appears that the main consideration was `interface` [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces). The idea seems to be that because declaration merging exists for interfaces, it is less safe to assume that they will structurally fit another type's index signature at any given moment. 
+But, after bringing the problem up with my Viget [internship advisor](https://www.viget.com/about/team/ntelsan/), he and [another TypeScript enthusiast](https://www.viget.com/about/team/shawk/) at Viget were able to pinpoint the issue. Literally, [this Github issue comment](https://github.com/Microsoft/TypeScript/issues/15300#issuecomment-332366024) describes the exact reasoning behind this behavior, and it appears that the main consideration was `interface` [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces). The idea seems to be that because declaration merging exists for interfaces, it is less safe to assume that they will structurally fit another type's index signature at any given moment. 
 
 ## The Solution
 
