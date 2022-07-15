@@ -52,6 +52,7 @@ export const load: Load = async ({ params: { slug } }) => {
 import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
 import { getComponentContent } from '$lib/dom';
+import { page } from '$app/stores';
 
 export let component: typeof SvelteComponent;
 export let post: Post;
@@ -61,7 +62,7 @@ export let content: string;
 <Meta
     title="{post.title} - Blog"
     description={post.description}
-    image={post.thumbnail?.src || '/favicon.png'}
+    image="{$page.url.origin}{BASE_URL}{post.thumbnail?.src || '/favicon.png'}"
     graph={[
         {
             '@type': 'BlogPosting',
