@@ -42,6 +42,7 @@ const config = {
         adapter: adapter({
             pages: 'public',
             assets: 'public',
+            fallback: '404.html',
         }),
         prerender: {
             default: true,

@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 import type { Load } from './__types/__error';
 
-export const load: Load = ({ error, status }) => {
+export const load: Load = ({ error, status, url }) => {
     if (!error || !status) {
         return {
             redirect: `${BASE_URL || '/'}`,
@@ -12,6 +12,12 @@ export const load: Load = ({ error, status }) => {
         props: {
             status,
             message: error.message,
+        },
+        stuff: {
+            breadcrumbs: [
+                { title: 'Errors', href: BASE_URL || '/' },
+                { title: status.toString(), href: url.pathname },
+            ],
         },
     };
 };
