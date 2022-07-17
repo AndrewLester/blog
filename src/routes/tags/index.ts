@@ -1,7 +1,7 @@
 import { getAllPosts } from '$lib/posts';
 import type { RequestHandler } from './__types/index';
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
     const tags = new Set<string>();
     const posts = await getAllPosts();
 
