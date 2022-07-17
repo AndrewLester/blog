@@ -10,7 +10,7 @@ tags:
 ---
 
 <script>
-import { BASE_URL } from '$lib/env';
+import { base } from '$app/paths';
 import Error from '$lib/components/markdown/Error.svelte';
 </script>
 

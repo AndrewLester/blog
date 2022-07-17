@@ -14,7 +14,6 @@ tags:
 <script>
 import ImageLink from '$lib/components/ImageLink.svelte';
 import Code from '$lib/components/markdown/Code.svelte';
-import { BASE_URL } from '$lib/env';
 </script>
 
 ## Why Deploy SvelteKit to Github Pages?

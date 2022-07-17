@@ -1,8 +1,9 @@
 <script context="module" lang="ts">
+import { base } from '$app/paths';
 import type { Load } from './__types/index';
 
 export const load: Load = async ({ fetch }) => {
-    const posts = await fetch(`${BASE_URL}/posts.json`).then((res) => res.json());
+    const posts = await fetch(`${base}/posts.json`).then((res) => res.json());
     return {
         props: {
             posts,
@@ -12,11 +13,10 @@ export const load: Load = async ({ fetch }) => {
 </script>
 
 <script lang="ts">
+import Meta from '$lib/components/head/Meta.svelte';
 import ImageLink from '$lib/components/ImageLink.svelte';
 import PostCard from '$lib/components/PostCard.svelte';
 import type { Post } from '$lib/types';
-import Meta from '$lib/components/head/Meta.svelte';
-import { BASE_URL } from '$lib/env';
 
 export let posts: Post[];
 </script>
@@ -26,8 +26,7 @@ export let posts: Post[];
 <section class="home">
     <h1>
         A blog about technical learnings as a
-        <ImageLink href="https://www.viget.com/" svg="{BASE_URL}/icons/viget.svg#icon"
-            >Viget</ImageLink>
+        <ImageLink href="https://www.viget.com/" svg="{base}/icons/viget.svg#icon">Viget</ImageLink>
         intern and frontend enthusiast.
     </h1>
 

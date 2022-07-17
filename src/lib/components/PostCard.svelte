@@ -1,6 +1,6 @@
 <script lang="ts">
+import { base } from '$app/paths';
 import TagList from '$lib/components/tags/TagList.svelte';
-import { BASE_URL } from '$lib/env';
 import { dateFormatter } from '$lib/format';
 import { getPostDate, type Post } from '$lib/types';
 
@@ -8,9 +8,9 @@ export let post: Post;
 </script>
 
 <section>
-    <a href="{BASE_URL}/posts/{post.slug}" sveltekit:prefetch>
+    <a href="{base}/posts/{post.slug}" sveltekit:prefetch>
         {#if post.thumbnail}
-            <img src="{BASE_URL}{post.thumbnail?.src}" alt={post.thumbnail?.alt} loading="lazy" />
+            <img src="{base}{post.thumbnail?.src}" alt={post.thumbnail?.alt} loading="lazy" />
         {/if}
         <h3>{post.title}</h3>
         <div class="metadata">

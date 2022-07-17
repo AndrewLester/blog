@@ -1,6 +1,6 @@
 <script lang="ts">
+import { base } from '$app/paths';
 import { breadcrumbs } from '$lib/breadcrumbs';
-import { BASE_URL } from '$lib/env';
 import { movingTransitionDuration } from '$lib/media';
 import { fade, slide } from 'svelte/transition';
 
@@ -19,12 +19,12 @@ function handleScroll() {
 <header class:drawn={scrollingDown} class:breadcrumbs={$breadcrumbs}>
     <nav class="main">
         <a href="/" class="home-link" rel="external">
-            <img src="{BASE_URL}/favicon.png" alt="" />
+            <img src="{base}/favicon.png" alt="" />
             Andrew Lester
         </a>
         <ul>
-            <li><a href={BASE_URL || '/'} sveltekit:prefetch>Posts</a></li>
-            <li><a href="{BASE_URL}/tags" sveltekit:prefetch>Tags</a></li>
+            <li><a href={base || '/'} sveltekit:prefetch>Posts</a></li>
+            <li><a href="{base}/tags" sveltekit:prefetch>Tags</a></li>
         </ul>
     </nav>
     {#if $breadcrumbs}

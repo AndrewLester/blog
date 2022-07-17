@@ -1,10 +1,11 @@
 <script context="module" lang="ts">
 import type { Load } from './__types/__error';
+import { base } from '$app/paths';
 
 export const load: Load = ({ error, status, url }) => {
     if (!error || !status) {
         return {
-            redirect: `${BASE_URL || '/'}`,
+            redirect: `${base || '/'}`,
         };
     }
 
@@ -15,7 +16,7 @@ export const load: Load = ({ error, status, url }) => {
         },
         stuff: {
             breadcrumbs: [
-                { title: 'Errors', href: BASE_URL || '/' },
+                { title: 'Errors', href: base || '/' },
                 { title: status.toString(), href: url.pathname },
             ],
         },
@@ -25,7 +26,6 @@ export const load: Load = ({ error, status, url }) => {
 
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
-import { BASE_URL } from '$lib/env';
 
 export let status: number;
 export let message: string;
@@ -36,7 +36,7 @@ export let message: string;
 <h1>{status}</h1>
 {#if status === 404}
     <h2>Page not found</h2>
-    <p>Return to the <a href={BASE_URL || '/'} sveltekit:prefetch>homepage</a>.</p>
+    <p>Return to the <a href={base || '/'} sveltekit:prefetch>homepage</a>.</p>
 {:else}
     <p>An unknown error occured. {message}</p>
 {/if}

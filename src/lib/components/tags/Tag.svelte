@@ -1,10 +1,10 @@
 <script lang="ts">
-import { BASE_URL } from '$lib/env';
+import { base } from '$app/paths';
 
 export let tag: string;
 </script>
 
-<a href="{BASE_URL}/tags/{tag}" class="tag" sveltekit:prefetch>{tag}</a>
+<a href="{base}/tags/{tag}" class="tag" sveltekit:prefetch>{tag}</a>
 
 <style>
 .tag {

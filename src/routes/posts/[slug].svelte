@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-import { BASE_URL, URL } from '$lib/env';
+import { URL } from '$lib/env';
 import { dateFormatter } from '$lib/format';
 import { getPostDate, type Post } from '$lib/types';
 import type { SvelteComponent } from 'svelte';
@@ -27,11 +27,11 @@ export const load: Load = async ({ params: { slug } }) => {
     };
     const breadcrumbs = [
         {
-            href: BASE_URL || '/',
+            href: base || '/',
             title: 'Posts',
         },
         {
-            href: `${BASE_URL}/posts/${slug}`,
+            href: `${base}/posts/${slug}`,
             title: frontmatter.title,
         },
     ];
@@ -53,6 +53,7 @@ import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
 import { getComponentContent } from '$lib/dom';
 import { page } from '$app/stores';
+import { base } from '$app/paths';
 
 export let component: typeof SvelteComponent;
 export let post: Post;
@@ -62,12 +63,12 @@ export let content: string;
 <Meta
     title="{post.title} - Blog"
     description={post.description}
-    image="{URL ? `https://${URL}` : $page.url.origin}{BASE_URL}{post.thumbnail?.src || '/favicon.png'}"
+    image="{URL ? `https://${URL}` : $page.url.origin}{base}{post.thumbnail?.src || '/favicon.png'}"
     graph={[
         {
             '@type': 'BlogPosting',
             image: post.thumbnail,
-            url: `${BASE_URL}/posts/${post.slug}`,
+            url: `${base}/posts/${post.slug}`,
             headline: post.title,
             alternativeHeadline: post.description,
             dateCreated: getPostDate(post).toISOString(),
@@ -101,7 +102,7 @@ export let content: string;
 
 <article>
     {#if post.thumbnail}
-        <img src="{BASE_URL}{post.thumbnail.src}" alt={post.thumbnail.alt} />
+        <img src="{base}{post.thumbnail.src}" alt={post.thumbnail.alt} />
     {/if}
     <h1>{post.title}</h1>
     <div class="metadata">
