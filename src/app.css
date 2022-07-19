@@ -10,8 +10,6 @@
     --heading-text-color: black;
     --body-text-color: rgba(0, 0, 0, 0.9);
 
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
 
