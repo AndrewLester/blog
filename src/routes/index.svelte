@@ -24,14 +24,8 @@ export let posts: Post[];
 <Meta title="Blog" />
 
 <section class="home">
-    <h1>
-        A blog about technical learnings as a
-        <ImageLink href="https://www.viget.com/" svg="{base}/icons/viget.svg#icon">Viget</ImageLink>
-        intern and frontend enthusiast.
-    </h1>
-
     <section>
-        <h2>Posts</h2>
+        <h1>Posts</h1>
         <div class="posts">
             {#each posts as post (post.slug)}
                 <PostCard {post} />
@@ -41,12 +35,12 @@ export let posts: Post[];
 </section>
 
 <style>
-h1 {
+/* h1 {
     max-width: 45ch;
     text-align: center;
     margin: 30px auto;
     font-size: 2rem;
-}
+} */
 
 .home {
     max-width: 90ch;
