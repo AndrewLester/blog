@@ -28,9 +28,7 @@ import { base } from '$app/paths';
 
 There is minimal configuration to do with SvelteKit when setting up your codebase for GitHub Pages. You'll first need to [tell SvelteKit to use the static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) and change any settings with respect to that. This process isn't so difficult, but it may uncover some bugs in your routing structure on deployment. To make sure you catch these earlier, you can always run `npm run build` locally before pushing commits to GitHub.
 
-Next, you'll potentially need to add one file to your project root. The following file is only necessary if you're serving your SvelteKit site from the root of your domain (no base URL). The file is named `CNAME`, and it should contain the domain name your site will live at. If you're hosting your site from a base URL, either with a custom domain or GitHub page's default domain, there's no need to add this.
-
-If you are serving your site from a base URL, there's one more change you'll have to make to SvelteKit's configuration. In the [`paths`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) key, change the `base` property to be equal to site's base URL. It should look something like this for a base URL of `/blog`:
+If you are serving your site from a base URL (like /blog), there's one more change you'll have to make to SvelteKit's configuration. In the [`paths`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) key, change the `base` property to be equal to site's base URL. It should look something like this for a base URL of `/blog`:
 
 ```js twoslash {4-7}
 /// <reference types="@sveltejs/kit" />
@@ -49,6 +47,8 @@ const config = {
 ```
 
 ## GitHub Pages Configuration
+
+Next, there's configuration in your project and GitHub repo settings. If you're hosting your site from a custom domain, you'll need to inform GitHub Pages of this in the Pages section of your repository's settings.
 
 Since GitHub Pages needs the static HTML files SvelteKit's `adapter-static` generates to host your site, you'll need to find some way to build these files whenever you push your code and send them to GitHub Pages to serve. Since GitHub Pages now supports [deployment through a custom GitHub Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#creating-a-custom-github-actions-workflow-to-publish-your-site), you can use GitHub Actions to build and deploy your site. If you're looking for a minimal CI setup to do this, you can use the GitHub workflow I'm using on my blog:
 
