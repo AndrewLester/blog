@@ -16,7 +16,7 @@ import ImageLink from '$lib/components/ImageLink.svelte';
 import Code from '$lib/components/markdown/Code.svelte';
 </script>
 
-This post is oudated due to new GitHub pages features. Check out the [newer post](/posts/sveltekit-and-github-pages).
+This post is oudated due to new GitHub Pages features. Check out the [newer post](/posts/sveltekit-and-github-pages).
 
 ## Why Deploy SvelteKit to Github Pages?
 

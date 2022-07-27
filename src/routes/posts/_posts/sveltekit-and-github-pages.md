@@ -87,9 +87,6 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
-        env:
-          VITE_BASE_URL: /blog
-          VITE_GITHUB_URL: andrewlester.net
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
@@ -109,3 +106,7 @@ jobs:
 </Code>
 
 This workflow is very simple, and just builds your site and pushes it to github-pages environment. Add it to the `.github/workflows` folder at the root of your repository.
+
+## All Done
+
+Just like that, you've got your SvelteKit site statically deployed on GitHub Pages. Since GitHub so graciously released [custom GitHub Actions workflows for Pages](https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/) after I released [my first post](/posts/%28outdated%29-sveltekit-and-github-pages) on the topic (where I asked about such a feature), maybe I'll make another request here: [GitHub pages deploy previews](https://github.com/community/community/discussions/7730#discussioncomment-1885967) soon?
