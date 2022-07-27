@@ -14,9 +14,10 @@ tags:
 <script>
 import ImageLink from '$lib/components/ImageLink.svelte';
 import Code from '$lib/components/markdown/Code.svelte';
+import { base } from '$app/paths';
 </script>
 
-This post is oudated due to new GitHub Pages features. Check out the [newer post](/posts/sveltekit-and-github-pages).
+This post is oudated due to new GitHub Pages features. Check out the [newer post]({base}/posts/sveltekit-and-github-pages).
 
 ## Why Deploy SvelteKit to Github Pages?
 
@@ -105,4 +106,4 @@ This workflow is very simple, and just builds your site and pushes it to the `gh
 
 While this setup isn't so bad, it would be nice not to have the intermediary branch `gh-pages` that does nothing other than store your built files. In truth, the files aren't only being stored there, they're also being placed in a GitHub actions artifact after every build to be passed between the workflow jobs.
 
-In [a post about GitHub Pages last December](https://github.blog/changelog/2021-12-16-github-pages-using-github-actions-for-builds-and-deployments-for-public-repositories/), GitHub announced that the GitHub pages build process may soon be customizable. As of July 27th, 2022, it now is! Read the [newer post](/posts/sveltekit-and-github-pages).
+In [a post about GitHub Pages last December](https://github.blog/changelog/2021-12-16-github-pages-using-github-actions-for-builds-and-deployments-for-public-repositories/), GitHub announced that the GitHub pages build process may soon be customizable. As of July 27th, 2022, it now is! Read the [newer post]({base}/posts/sveltekit-and-github-pages).
