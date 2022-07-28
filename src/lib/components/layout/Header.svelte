@@ -23,7 +23,7 @@ function handleScroll() {
             Andrew Lester
         </a>
         <ul>
-            <li><a href={base || '/'} sveltekit:prefetch>Posts</a></li>
+            <li><a href={base + '/'} sveltekit:prefetch>Posts</a></li>
             <li><a href="{base}/tags" sveltekit:prefetch>Tags</a></li>
         </ul>
     </nav>
