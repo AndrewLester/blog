@@ -50,6 +50,7 @@ const config = {
         paths: {
             base: process.env.VITE_BASE_URL,
         },
+        trailingSlash: 'ignore',
     },
 };
 

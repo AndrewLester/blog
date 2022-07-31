@@ -27,7 +27,7 @@ export const load: Load = async ({ params: { slug } }) => {
     };
     const breadcrumbs = [
         {
-            href: base || '/',
+            href: base + '/',
             title: 'Posts',
         },
         {
