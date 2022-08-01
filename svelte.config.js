@@ -46,6 +46,7 @@ const config = {
         }),
         prerender: {
             default: true,
+            entries: ['*', '/sitemap.xml'],
         },
         paths: {
             base: process.env.VITE_BASE_URL,
