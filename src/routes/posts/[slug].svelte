@@ -67,8 +67,8 @@ export let content: string;
     graph={[
         {
             '@type': 'BlogPosting',
-            image: post.thumbnail,
-            url: `${base}/posts/${post.slug}`,
+            image: `${URL ? `https://${URL}` : $page.url.origin}${base}${post.thumbnail?.src}`,
+            url: `${URL ? `https://${URL}` : $page.url.origin}${base}/posts/${post.slug}`,
             headline: post.title,
             alternativeHeadline: post.description,
             dateCreated: getPostDate(post).toISOString(),
