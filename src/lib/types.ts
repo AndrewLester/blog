@@ -13,7 +13,7 @@ export type Post = {
 };
 
 export type Breadcrumb = {
-    href: string;
+    path: string;
     title: string;
 };
 

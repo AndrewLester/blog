@@ -15,11 +15,11 @@ export const load: Load = async ({ fetch, params: { tag } }) => {
 
     const breadcrumbs = [
         {
-            href: `${base}/tags`,
+            path: `${base}/tags`,
             title: 'Tags',
         },
         {
-            href: `${base}/tags/${tag}`,
+            path: `${base}/tags/${tag}`,
             title: tag,
         },
     ];

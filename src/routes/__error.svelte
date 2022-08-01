@@ -16,8 +16,8 @@ export const load: Load = ({ error, status, url }) => {
         },
         stuff: {
             breadcrumbs: [
-                { title: 'Errors', href: base + '/' },
-                { title: status.toString(), href: url.pathname },
+                { title: 'Errors', path: base + '/' },
+                { title: status.toString(), path: url.pathname },
             ],
         },
     };

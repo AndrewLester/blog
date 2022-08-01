@@ -38,11 +38,11 @@ function handleScroll() {
                     out:fade|local={{ duration: 100 }}>
                     {#each $breadcrumbs.path as breadcrumb}
                         <li class="breadcrumb path">
-                            <a href={breadcrumb.href} sveltekit:prefetch>{breadcrumb.title}</a> /
+                            <a href={breadcrumb.path} sveltekit:prefetch>{breadcrumb.title}</a> /
                         </li>
                     {/each}
                     <li class="breadcrumb current">
-                        <a href={$breadcrumbs.current.href} sveltekit:prefetch
+                        <a href={$breadcrumbs.current.path} sveltekit:prefetch
                             >{$breadcrumbs.current.title}</a>
                     </li>
                 </ul>

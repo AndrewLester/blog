@@ -27,11 +27,11 @@ export const load: Load = async ({ params: { slug } }) => {
     };
     const breadcrumbs = [
         {
-            href: base + '/',
+            path: base + '/',
             title: 'Posts',
         },
         {
-            href: `${base}/posts/${slug}`,
+            path: `${base}/posts/${slug}`,
             title: frontmatter.title,
         },
     ];
