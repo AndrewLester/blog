@@ -36,7 +36,7 @@ export let message: string;
 <h1>{status}</h1>
 {#if status === 404}
     <h2>Page not found</h2>
-    <p>Return to the <a href={base || '/'} sveltekit:prefetch>homepage</a>.</p>
+    <p>Return to the <a href={base + '/'} sveltekit:prefetch>homepage</a>.</p>
 {:else}
     <p>An unknown error occured. {message}</p>
 {/if}
