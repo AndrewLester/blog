@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-import { URL } from '$lib/env';
 import { dateFormatter } from '$lib/format';
 import { getPostDate, type Post } from '$lib/types';
 import type { SvelteComponent } from 'svelte';
@@ -24,6 +23,7 @@ export const load: Load = async ({ params: { slug } }) => {
         thumbnail: frontmatter.thumbnail,
         description: frontmatter.description,
         tags: frontmatter.tags,
+        crossposted: frontmatter.crossposted,
     };
     const breadcrumbs = [
         {
@@ -63,12 +63,12 @@ export let content: string;
 <Meta
     title="{post.title} - Blog"
     description={post.description}
-    image="{URL ? `https://${URL}` : $page.url.origin}{base}{post.thumbnail?.src || '/favicon.png'}"
+    image="{$page.url.origin}{base}{post.thumbnail?.src || '/favicon.png'}"
     graph={[
         {
             '@type': 'BlogPosting',
-            image: `${URL ? `https://${URL}` : $page.url.origin}${base}${post.thumbnail?.src}`,
-            url: `${URL ? `https://${URL}` : $page.url.origin}${base}/posts/${post.slug}`,
+            image: `${$page.url.origin}${base}${post.thumbnail?.src}`,
+            url: `${$page.url.origin}${base}/posts/${post.slug}`,
             headline: post.title,
             alternativeHeadline: post.description,
             dateCreated: getPostDate(post).toISOString(),
@@ -109,6 +109,12 @@ export let content: string;
         <time datetime={getPostDate(post).toDateString()}
             >{dateFormatter.format(getPostDate(post))}</time>
         <TagList tags={post.tags} oneline />
+        {#if post.crossposted}
+            <p>
+                Also posted on <a href={post.crossposted}
+                    >{new URL(post.crossposted).hostname.replace('www.', '')}</a>
+            </p>
+        {/if}
     </div>
     <p class="description">{post.description}</p>
     <svelte:component this={component} />
@@ -132,7 +138,7 @@ article :global(.full-width) {
     overflow: hidden;
 }
 
-article :global(p) {
+article > :global(p) {
     margin-bottom: 20px;
     font-size: 1.2rem;
 }
@@ -181,7 +187,7 @@ img {
 
 .metadata {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-between;
     color: rgba(0, 0, 0, 0.6);
     gap: 10px;

@@ -10,6 +10,7 @@ export type Post = {
     description: string;
     thumbnail?: Image;
     tags: string[];
+    crossposted?: string;
 };
 
 export type Breadcrumb = {

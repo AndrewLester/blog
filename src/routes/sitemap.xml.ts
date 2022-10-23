@@ -1,9 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { URL } from '$lib/env';
 import { getAllPosts } from '$lib/posts';
 import { base } from '$app/paths';
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ url }) => {
     const posts = await getAllPosts();
     const pages = [{ path: '/tags' }];
 
@@ -12,7 +11,7 @@ export const GET: RequestHandler = async () => {
         'Content-Type': 'application/xml',
     };
 
-    const origin = URL;
+    const { origin } = url;
 
     return {
         headers,

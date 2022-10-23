@@ -13,7 +13,8 @@ export async function getAllPosts(): Promise<Post[]> {
     );
 
     for (const { filename, imported } of imports) {
-        const { title, description, date, tags, thumbnail } = (imported as any).metadata;
+        const { title, description, date, tags, thumbnail, crossposted } = (imported as any)
+            .metadata;
         const post = {
             slug: decodeURIComponent(filename.match(/.+?_posts\/(.+?)\.md/)![1]),
             description,
@@ -21,6 +22,7 @@ export async function getAllPosts(): Promise<Post[]> {
             date,
             tags,
             thumbnail,
+            crossposted,
         };
         posts.push(post);
     }

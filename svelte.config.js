@@ -47,6 +47,7 @@ const config = {
         prerender: {
             default: true,
             entries: ['*', '/sitemap.xml'],
+            origin: 'https://andrewlester.net',
         },
         paths: {
             base: process.env.VITE_BASE_URL,

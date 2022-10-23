@@ -1,8 +1,8 @@
 <script lang="ts">
 import { base } from '$app/paths';
+import { page } from '$app/stores';
 import { breadcrumbs } from '$lib/breadcrumbs';
 import type { JSONObject } from '@sveltejs/kit/types/private';
-import { URL } from '$lib/env';
 
 export let title: string;
 export let description: string =
@@ -17,7 +17,7 @@ $: breadcrumbGraph = $breadcrumbs && {
         '@type': 'ListItem',
         position: i + 1,
         name: breadcrumb.title,
-        item: `https://${URL}${breadcrumb.path}`,
+        item: `${$page.url.origin}${breadcrumb.path}`,
     })),
 };
 $: graph = [...graph, breadcrumbGraph].filter((g) => g !== undefined) as JSONObject[];

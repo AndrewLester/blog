@@ -36,6 +36,7 @@ export let arrow = false;
 
 .code-comparison :global(p) {
     text-align: center;
+    font-size: 1.2rem;
 }
 
 .arrow {
