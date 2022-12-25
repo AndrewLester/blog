@@ -91,7 +91,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./public
+          path: ./build
 
   deploy:
     runs-on: ubuntu-latest
