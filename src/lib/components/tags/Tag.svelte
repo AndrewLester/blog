@@ -4,7 +4,7 @@ import { base } from '$app/paths';
 export let tag: string;
 </script>
 
-<a href="{base}/tags/{tag}" class="tag" sveltekit:prefetch>{tag}</a>
+<a href="{base}/tags/{tag}" class="tag">{tag}</a>
 
 <style>
 .tag {

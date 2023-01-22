@@ -2,6 +2,8 @@ import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
 import { transformAttributesToHTML, highlightersFromSettings } from 'remark-shiki-twoslash';
+import autoHeading from 'rehype-autolink-headings';
+import autoSlug from 'rehype-slug';
 
 /**
  * Swiped from MDsveX
@@ -11,7 +13,7 @@ export const escapeSvelte = (str) =>
         .replace(/[{}`]/g, (c) => ({ '{': '&#123;', '}': '&#125;', '`': '&#96;' }[c]))
         .replace(/\\([trn])/g, '&#92;$1');
 
-const twoslashSettings = { theme: 'min-light', alwayRaiseForTwoslashExceptions: true };
+const twoslashSettings = { theme: 'dark-plus', alwayRaiseForTwoslashExceptions: true };
 const highlighters = highlightersFromSettings(twoslashSettings);
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -23,6 +25,7 @@ const config = {
         preprocess(),
         mdsvex({
             extensions: ['.md'],
+            rehypePlugins: [autoSlug, autoHeading],
             highlight: {
                 highlighter: async (code, lang = '', metastring = '') => {
                     return escapeSvelte(

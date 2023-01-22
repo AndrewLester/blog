@@ -21,43 +21,49 @@ function copy(event: MouseEvent) {
 }
 </script>
 
-<div class="wrapper" bind:this={wrapper}>
-    <a {href}
-        ><span>{filename}</span> <code>Gist</code>
-        <span class="buttons"
-            ><IconButton
-                name={copied ? 'check' : 'copy'}
-                on:click={copy}
-                --color={copied ? 'var(--turquoise)' : undefined} /></span>
-    </a>
+<figure bind:this={wrapper}>
+    <header>
+        <a {href}>
+            <span>{filename}</span>
+            <code>Gist</code>
+        </a>
+        <IconButton
+            name={copied ? 'check' : 'copy'}
+            on:click={copy}
+            --color={copied ? 'var(--turquoise)' : undefined} />
+    </header>
     <slot />
-</div>
+</figure>
 
 <style>
-.wrapper {
+figure {
     border: 1px solid black;
     border-radius: 5px;
     overflow: hidden;
     margin-bottom: 20px;
 }
 
+header {
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
 a {
     display: block;
-    font-weight: bold;
     padding: 10px 10px;
     font-size: 1.25rem;
     text-decoration: none;
     font-family: var(--font-body);
     color: var(--body-text-color);
-    background-color: #d9d9d9;
-    border-bottom: 1px solid black;
+    flex: 1;
 }
 
-.buttons {
-    float: right;
+code {
+    color: white !important;
 }
 
-.wrapper :global(pre) {
+figure :global(pre) {
     margin: 0;
+    border: none;
 }
 </style>

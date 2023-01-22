@@ -143,13 +143,44 @@ article > :global(p) {
     font-size: 1.2rem;
 }
 
-article :global(:where(h1, h2, h3)) {
-    margin-block: 20px;
-}
-
 article :global(h1) {
     text-align: center;
     margin-bottom: 30px;
+}
+
+article :global(h2) {
+    position: relative;
+    scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+article :global(h2 .icon::before) {
+    content: '#';
+    position: absolute;
+    top: 0;
+    right: 100%;
+    padding-right: 10px;
+    opacity: 0;
+    transition: opacity 200ms ease, color 200ms ease;
+    color: black;
+}
+
+article :global(h2 a) {
+    text-decoration: none;
+}
+
+@media (max-width: 800px) {
+    article :global(h2 .icon::before) {
+        position: unset;
+        opacity: 1;
+        font-size: inherit;
+    }
+}
+
+article :global(h2:hover .icon::before) {
+    opacity: 1;
+}
+article :global(.icon:hover::before) {
+    color: rgb(50 157 47);
 }
 
 article :global(pre) {
@@ -158,18 +189,24 @@ article :global(pre) {
 }
 
 article :global(p a:not(.image-link)) {
-    color: var(--teal);
-    text-underline-offset: 1px;
+    color: rgb(50 157 47);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+article :global(p a:not(.image-link):hover) {
+    text-decoration: underline;
 }
 
 article :global(p code),
 article :global(a code) {
-    background-color: rgb(230, 230, 230);
+    background-color: #1e1e1e;
+    color: rgb(156, 220, 254);
+    font-size: 1rem;
+    padding: 2px;
     border-radius: 5px;
-    outline: 1px solid gray;
-    padding-inline: 2px;
-    font-family: 'Consolas', monospace;
-    font-weight: normal;
+    font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, Courier New, monospace;
+    word-break: keep-all;
     white-space: nowrap;
 }
 

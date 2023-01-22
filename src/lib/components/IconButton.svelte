@@ -11,12 +11,13 @@ export let name: string;
 <style>
 button {
     appearance: none;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 2px 5px;
-    font-size: inherit;
+    border: none;
+    border-left: 1px solid black;
+    font-size: 1.5rem;
+    width: 2em;
+    align-self: stretch;
     cursor: pointer;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(219, 233, 233);
     color: var(--color, currentColor);
 }
 </style>

@@ -21,8 +21,7 @@ import { base } from '$app/paths';
 
 [GitHub Pages](https://pages.github.com/) is a well known, easy to use, and free hosting provider for static websites. It has a number of useful features that hook into GitHub itself, like forwarding pages of your site to different repositories by name. In addition, you can make use of all the other GitHub tools you enjoy, such as actions and issues (with some [cool features](https://utteranc.es/)).
 
-[SvelteKit](https://kit.svelte.dev/), Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a [static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static), which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub Pages, *even with a different base URL*.
-
+[SvelteKit](https://kit.svelte.dev/), Svelte's fullstack application framework which I'm using to host my blog, can be adapted to different hosting providers depending on your use case. For a blog, it makes sense to turn the entire site into static HTML. SvelteKit supports this by providing a [static adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-static), which prerenders the entire site in advance. These files can then be sent up to GitHub to be hosted by GitHub Pages. In the next few sections I'll go over the necessary configuration to get your static SvelteKit site deployed to GitHub Pages, _even with a different base URL_.
 
 ## SvelteKit Configuration
 
@@ -30,7 +29,7 @@ There is minimal configuration to do with SvelteKit when setting up your codebas
 
 If you are serving your site from a base URL (like /blog), there's one more change you'll have to make to SvelteKit's configuration. In the [`paths`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#usage) key, change the `base` property to be equal to site's base URL. It should look something like this for a base URL of `/blog`:
 
-```js twoslash {4-7}
+```js twoslash {4-6}
 /// <reference types="@sveltejs/kit" />
 const otherStuff = {};
 /** @type {import('@sveltejs/kit').Config} */
@@ -38,10 +37,9 @@ const otherStuff = {};
 const config = {
     kit: {
         ...otherStuff,
-
         paths: {
-            base: '/blog'
-        }
+            base: '/blog',
+        },
     },
 };
 ```
@@ -58,50 +56,50 @@ Since GitHub Pages needs the static HTML files SvelteKit's `adapter-static` gene
 name: Build and Deploy to Pages
 
 on:
-  push:
-    branches: ["main"]
+    push:
+        branches: ['main']
 
-  workflow_dispatch:
+    workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
-  cancel-in-progress: true
+    group: 'pages'
+    cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/configure-pages@v1
-        id: pages
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./build
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/configure-pages@v1
+              id: pages
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+                  cache: 'npm'
+            - run: npm ci
+            - run: npm run build
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v1
+              with:
+                  path: ./build
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v1
-        id: deployment
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - uses: actions/deploy-pages@v1
+              id: deployment
 ```
 
 </Code>
