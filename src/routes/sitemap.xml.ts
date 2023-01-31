@@ -25,13 +25,13 @@ export const GET: RequestHandler = async ({ url }) => {
           xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
         >
           <url>
-            <loc>https://${origin}</loc>
+            <loc>${origin}</loc>
             <changefreq>daily</changefreq>
             <priority>0.7</priority>
           </url>
           ${pages.map(
               (page) => `<url>
-            <loc>https://${origin}${base}${page.path}</loc>
+            <loc>${origin}${base}${page.path}</loc>
             <changefreq>daily</changefreq>
             <priority>0.7</priority>
         </url>`,
@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ url }) => {
               .map(
                   (post) =>
                       `<url>
-            <loc>https://${origin}${base}/posts/${post.slug}</loc>
+            <loc>${origin}${base}/posts/${post.slug}</loc>
             <changefreq>daily</changefreq>
             <priority>0.7</priority>
           </url>
