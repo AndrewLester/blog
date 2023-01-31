@@ -43,8 +43,6 @@ const config = {
 
     kit: {
         adapter: adapter({
-            pages: 'public',
-            assets: 'public',
             fallback: '404.html',
         }),
         prerender: {
