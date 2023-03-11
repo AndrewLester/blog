@@ -27,5 +27,22 @@ export async function getAllPosts(): Promise<Post[]> {
         posts.push(post);
     }
 
-    return posts;
+    const sortedPosts = posts.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    );
+
+    return sortedPosts;
+}
+
+export async function getAllTags() {
+    const tags = new Set<string>();
+    const posts = await getAllPosts();
+
+    for (const post of posts) {
+        for (const tag of post.tags) {
+            tags.add(tag);
+        }
+    }
+
+    return [...tags];
 }

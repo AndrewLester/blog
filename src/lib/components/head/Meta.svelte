@@ -2,13 +2,12 @@
 import { base } from '$app/paths';
 import { page } from '$app/stores';
 import { breadcrumbs } from '$lib/breadcrumbs';
-import type { JSONObject } from '@sveltejs/kit/types/private';
 
 export let title: string;
 export let description: string =
     'A blog about technical learnings as a computer science student and frontend enthusiast.';
 export let image: string = `${base}/favicon.png`;
-export let graph: JSONObject[] = [];
+export let graph: {}[] = [];
 
 $: fullTitle = `${title} | Andrew Lester`;
 $: breadcrumbGraph = $breadcrumbs && {
@@ -20,7 +19,7 @@ $: breadcrumbGraph = $breadcrumbs && {
         item: `${$page.url.origin}${breadcrumb.path}`,
     })),
 };
-$: graph = [...graph, breadcrumbGraph].filter((g) => g !== undefined) as JSONObject[];
+$: graph = [...graph, breadcrumbGraph].filter((g) => g !== undefined) as {}[];
 $: jsonLd = `
     <scrip${'t'} type="application/ld+json">
         {

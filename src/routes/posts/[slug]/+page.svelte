@@ -1,63 +1,15 @@
-<script context="module" lang="ts">
-import { dateFormatter } from '$lib/format';
-import { getPostDate, type Post } from '$lib/types';
-import type { SvelteComponent } from 'svelte';
-import type { Load } from './__types/[slug]';
-
-export const load: Load = async ({ params: { slug } }) => {
-    let frontmatter: Post;
-    let component: typeof SvelteComponent;
-    try {
-        const { metadata, default: defaultImport } = await import(`./_posts/${slug}.md`);
-        frontmatter = metadata;
-        component = defaultImport;
-    } catch {
-        return {
-            status: 404,
-        };
-    }
-    const post = {
-        slug,
-        title: frontmatter.title,
-        date: new Date(frontmatter.date),
-        thumbnail: frontmatter.thumbnail,
-        description: frontmatter.description,
-        tags: frontmatter.tags,
-        crossposted: frontmatter.crossposted,
-    };
-    const breadcrumbs = [
-        {
-            path: base + '/',
-            title: 'Posts',
-        },
-        {
-            path: `${base}/posts/${slug}`,
-            title: frontmatter.title,
-        },
-    ];
-    return {
-        props: {
-            component,
-            post,
-            content: getComponentContent(component, { post }),
-        },
-        stuff: {
-            breadcrumbs,
-        },
-    };
-};
-</script>
-
 <script lang="ts">
+import { base } from '$app/paths';
+import { page } from '$app/stores';
 import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
-import { getComponentContent } from '$lib/dom';
-import { page } from '$app/stores';
-import { base } from '$app/paths';
+import { dateFormatter } from '$lib/format';
+import { getPostDate } from '$lib/types';
+import type { PageData } from './$types';
 
-export let component: typeof SvelteComponent;
-export let post: Post;
-export let content: string;
+export let data: PageData;
+
+$: ({ post, content, component } = data);
 </script>
 
 <Meta

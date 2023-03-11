@@ -23,8 +23,8 @@ function handleScroll() {
             Andrew Lester
         </a>
         <ul>
-            <li><a href={base + '/'} sveltekit:prefetch>Posts</a></li>
-            <li><a href="{base}/tags" sveltekit:prefetch>Tags</a></li>
+            <li><a href={base + '/'}>Posts</a></li>
+            <li><a href="{base}/tags">Tags</a></li>
         </ul>
     </nav>
     {#if $breadcrumbs}
@@ -32,18 +32,17 @@ function handleScroll() {
             class="breadcrumbs"
             aria-label="Breadcrumb"
             transition:slide={{ duration: $movingTransitionDuration }}>
-            {#key $breadcrumbs}
+            {#key $breadcrumbs.fullString}
                 <ul
                     in:fade|local={{ duration: 100, delay: 100 }}
                     out:fade|local={{ duration: 100 }}>
                     {#each $breadcrumbs.path as breadcrumb}
                         <li class="breadcrumb path">
-                            <a href={breadcrumb.path} sveltekit:prefetch>{breadcrumb.title}</a> /
+                            <a href={breadcrumb.path}>{breadcrumb.title}</a> /
                         </li>
                     {/each}
                     <li class="breadcrumb current">
-                        <a href={$breadcrumbs.current.path} sveltekit:prefetch
-                            >{$breadcrumbs.current.title}</a>
+                        <a href={$breadcrumbs.current.path}>{$breadcrumbs.current.title}</a>
                     </li>
                 </ul>
             {/key}
