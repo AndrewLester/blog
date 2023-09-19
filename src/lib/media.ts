@@ -1,4 +1,4 @@
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 import { derived, readable, type Readable } from 'svelte/store';
 
 export function mediaQuery(query: string): Readable<boolean> {

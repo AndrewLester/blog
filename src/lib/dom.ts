@@ -1,7 +1,7 @@
-import { browser } from '$app/env';
-import type { SvelteComponent } from 'svelte';
+import { browser } from '$app/environment';
+import type { ComponentType } from 'svelte';
 
-export function getComponentContent(component: typeof SvelteComponent, props: object) {
+export function getComponentContent(component: ComponentType, props: object) {
     if (browser) {
         const wrapper = document.createElement('div');
         new component({

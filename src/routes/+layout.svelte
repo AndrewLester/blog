@@ -1,9 +1,9 @@
 <script lang="ts">
-import { breadcrumbs } from '$lib/breadcrumbs';
+import { page } from '$app/stores';
 import Header from '$lib/components/layout/Header.svelte';
 import '../app.css';
 
-$: headerHeight = $breadcrumbs ? '92px' : '46px';
+$: headerHeight = $page.data.breadcrumbs ? '92px' : '46px';
 </script>
 
 <Header />

@@ -43,19 +43,15 @@ const config = {
 
     kit: {
         adapter: adapter({
-            pages: 'public',
-            assets: 'public',
             fallback: '404.html',
         }),
         prerender: {
-            default: true,
-            entries: ['*', '/sitemap.xml'],
+            entries: ['*'],
             origin: 'https://andrewlester.net',
         },
         paths: {
             base: process.env.VITE_BASE_URL,
         },
-        trailingSlash: 'ignore',
     },
 };
 

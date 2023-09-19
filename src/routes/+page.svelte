@@ -1,24 +1,9 @@
-<script context="module" lang="ts">
-import { base } from '$app/paths';
-import type { Load } from './__types/index';
-
-export const load: Load = async ({ fetch }) => {
-    const posts = await fetch(`${base}/posts.json`).then((res) => res.json());
-    return {
-        props: {
-            posts,
-        },
-    };
-};
-</script>
-
 <script lang="ts">
 import Meta from '$lib/components/head/Meta.svelte';
-import ImageLink from '$lib/components/ImageLink.svelte';
 import PostCard from '$lib/components/PostCard.svelte';
-import type { Post } from '$lib/types';
+import type { PageData } from './$types';
 
-export let posts: Post[];
+export let data: PageData;
 </script>
 
 <Meta title="Blog" />
@@ -27,7 +12,7 @@ export let posts: Post[];
     <section>
         <h1>Posts</h1>
         <div class="posts">
-            {#each posts as post (post.slug)}
+            {#each data.posts as post (post.slug)}
                 <PostCard {post} />
             {/each}
         </div>
