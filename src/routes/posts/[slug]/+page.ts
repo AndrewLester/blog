@@ -3,9 +3,8 @@ import { getComponentContent } from '$lib/dom';
 import type { Post } from '$lib/types';
 import { error } from '@sveltejs/kit';
 import type { SvelteComponent } from 'svelte';
-import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params: { slug } }) => {
+export async function load({ params: { slug } }) {
     let frontmatter: Post;
     let component: typeof SvelteComponent;
     try {
@@ -32,4 +31,4 @@ export const load: PageLoad = async ({ params: { slug } }) => {
         content: getComponentContent(component, { post: frontmatter }),
         breadcrumbs,
     };
-};
+}

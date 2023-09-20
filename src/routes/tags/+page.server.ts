@@ -1,8 +1,7 @@
 import { getAllTags } from '$lib/posts';
-import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
+export function load() {
     return {
         tags: getAllTags(),
     };
-};
+}

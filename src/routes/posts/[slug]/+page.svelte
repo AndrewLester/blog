@@ -90,7 +90,7 @@ article :global(.full-width) {
     overflow: hidden;
 }
 
-article > :global(p) {
+article > :global(:where(p, ul, ol)) {
     margin-bottom: 20px;
     font-size: 1.2rem;
 }
@@ -150,7 +150,7 @@ article :global(p a:not(.image-link):hover) {
     text-decoration: underline;
 }
 
-article :global(p code),
+article :global(:where(p, li) code),
 article :global(a code) {
     background-color: #1e1e1e;
     color: rgb(156, 220, 254);

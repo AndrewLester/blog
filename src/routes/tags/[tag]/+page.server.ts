@@ -1,9 +1,8 @@
 import { base } from '$app/paths';
 import { getAllPosts } from '$lib/posts';
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params: { tag } }) => {
+export async function load({ params: { tag } }) {
     const posts = await getAllPosts();
 
     const taggedPosts = posts.filter((post) => post.tags.includes(tag));
@@ -28,4 +27,4 @@ export const load: PageServerLoad = async ({ params: { tag } }) => {
         taggedPosts,
         breadcrumbs,
     };
-};
+}

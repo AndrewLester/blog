@@ -1,8 +1,7 @@
-import type { RequestHandler } from './$types';
 import { getAllPosts } from '$lib/posts';
 import { base } from '$app/paths';
 
-export const GET: RequestHandler = async ({ url }) => {
+export async function GET({ url }) {
     const posts = await getAllPosts();
     const pages = [{ path: '/tags' }];
 
@@ -51,4 +50,4 @@ export const GET: RequestHandler = async ({ url }) => {
         headers,
         status: 200,
     });
-};
+}
