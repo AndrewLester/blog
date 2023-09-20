@@ -204,7 +204,7 @@ Other than that, most things you'll use from React/HTML/CSS land are the same in
 
 Lastly, I couldn't help but include a section on TailwindCSS even though it isn't tied to Next.js, really. It's important nonetheless, so read on.
 
-To avoid having to write all our component's CSS in scoped (belonging to the component and unable to select outside of it) CSS modules let alone a global CSS file, TailwindCSS makes it feasible to write CSS inline at the HTML tag level. Using the HTML `class` attribute (`className` in React), it provides a giant list of classes you can apply to elements to given them a breadth of useful styles.
+To avoid having to write all our component's CSS in scoped (belonging to the component and unable to select outside of it) CSS modules let alone a global CSS file, TailwindCSS makes it feasible to write CSS inline at the HTML tag level. Using the HTML `class` attribute (`className` in React), it provides a giant list of classes you can apply to elements to give them a breadth of useful styles.
 
 Here's an example:
 
