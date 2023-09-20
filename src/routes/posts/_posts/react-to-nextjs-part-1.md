@@ -145,7 +145,7 @@ So, what exactly did we gain from switching to client-side routing?
 
 -   We no longer lose some of our application state when changing pages
 -   We no longer re-download the React library JavaScript when we change pages, since we never fetch another HTML file after we first visit!
-    -   To note: we now only need _one_ HTML file for the entire _website_. This will come in handy in the next section, and it's why there's no HTML files in Next.js
+    -   To note: we now only need _one_ HTML file for the entire _website_. React handles the content changing on a per-page basis. This will come in handy in the next section, and it's why there's no HTML files in Next.js
 
 ## Next.js, finally
 
