@@ -51,6 +51,7 @@ const config = {
         },
         paths: {
             base: process.env.VITE_BASE_URL,
+            // relative: false,
         },
     },
 };
