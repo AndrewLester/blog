@@ -101,6 +101,8 @@ That means our contribution list state variable we declared in `/food.html` is j
 
 One thing we could do to fix the above problem is _prevent the default_ navigation system used by the browser. This will stop it from destroying the page state in memory, similar to how we called `event.preventDefault()` when handling a form submission because we didn't want to reload the page then either. This system is known as _client-side routing_, because our React application, running solely in the browser, pretends to be doing usual browser navigation but never actually reaches out to a server to do it (as is the usual, where a new HTML page is fetched and JS is downloaded and executed).
 
+So what does navigation mean then, if we're not loading a new page's HTML file? Well, we will swap out the content (HTML or JSX) of the page, but through a different mechanism.
+
 How does our website now decide which HTML (JSX) to show based on the current page path? Well, we can decide for it using standard React conditional rendering (displaying components if a conditon is met). Take a look at the code example below for some pseudocode:
 
 ```tsx twoslash
@@ -132,6 +134,8 @@ function App() {
     );
 }
 ```
+
+Importantly, notice the `contentComponent` variable. This is set to the `<FoodApp` component if the `pagePath === '/food.html'`, and `<ContributionApp` otherwise. In this way, the page's content is determined by either of those two components depending on the page.
 
 Further, if you take a look at the `<Navbar />` and `<Footer />` components, you'll notice they're _always_ rendered. React is optimized to leave them be while the `contentComponent` variable might change, so any state you've got in those will remain. If you're listening to a song in the footer, it will keep playing! For our purposes, we can put the `contributions` state variable somewhere _outside_ the page-specific components, so it will stay the same when the page is changed.
 
