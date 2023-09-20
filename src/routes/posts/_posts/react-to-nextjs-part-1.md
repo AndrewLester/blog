@@ -3,7 +3,7 @@ title: From React to Next.js Part 1
 date: '09-20-2023'
 description: 'Part 1: Client Side'
 thumbnail:
-    src: '/images/posts/react-to-nextjs/thumbnail.png'
+    src: '/images/posts/react-to-nextjs-part-1/thumbnail.png'
     alt: React and Next.js logos together
 tags:
     - React
