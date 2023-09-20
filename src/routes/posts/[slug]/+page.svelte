@@ -5,9 +5,8 @@ import Meta from '$lib/components/head/Meta.svelte';
 import TagList from '$lib/components/tags/TagList.svelte';
 import { dateFormatter } from '$lib/format';
 import { getPostDate } from '$lib/types';
-import type { PageData } from './$types';
 
-export let data: PageData;
+export let data;
 
 $: ({ post, content, component } = data);
 </script>
